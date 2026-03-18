@@ -16,7 +16,8 @@
 </head>
 
 <body>
-<div class="app" role="main">
+<a class="skip-link" href="#app-main">Pular para o conteúdo</a>
+<main class="app" id="app-main" tabindex="-1">
 
   <!-- ============================================================
        TOPBAR
@@ -41,7 +42,7 @@
   <!-- ============================================================
        HOME
   ============================================================ -->
-  <section id="screen-home" class="screen active" aria-label="Menu principal">
+  <section id="screen-home" class="screen active" aria-label="Menu principal" tabindex="-1">
     <div class="card">
       <div class="card-header">
         <div>
@@ -50,7 +51,7 @@
         </div>
       </div>
 
-      <div class="menu-grid" role="navigation" aria-label="Módulos disponíveis">
+      <nav class="menu-grid" aria-label="Módulos disponíveis">
         <button class="menu-card" data-color="blue" data-click="go('assumir')">
           <div class="menu-icon"><img src="img/extracted_2.png" alt="Viatura PMRv" class="menu-icon-img menu-icon-img-vtr" /></div>
           <div class="menu-title">Iniciando o Serviço</div>
@@ -99,18 +100,15 @@
           <div class="menu-desc">Manual de uso de cada opção</div>
           <span class="menu-arrow">›</span>
         </button>
-      </div>
+      </nav>
     </div>
   </section>
 
   <!-- ============================================================
        INICIANDO O SERVIÇO
   ============================================================ -->
-  <section id="screen-assumir" class="screen">
-    <div class="back-row">
-      <button class="btn" data-click="go('home')">← Voltar</button>
-      <button class="btn btn-danger" data-click="go('ended')">Sair</button>
-    </div>
+  <section id="screen-assumir" class="screen" tabindex="-1">
+    <div data-component="screen-nav" data-back-target="home" data-exit-target="ended"></div>
     <div class="card">
       <div class="card-header">
         <div>
@@ -122,7 +120,7 @@
       <div class="form-grid">
         <!-- Mesa -->
         <div class="form-field">
-          <button id="ass_mesa_btn" type="button" class="vtr-btn" style="width:100%;font-size:15px;padding:12px;" data-click="ass_toggleMesa()">🪑 Recepção do P19</button>
+          <button id="ass_mesa_btn" type="button" class="vtr-btn" data-click="ass_toggleMesa()">🪑 Recepção do P19</button>
         </div>
 
         <!-- Builder: Viatura + Policiais -->
@@ -140,17 +138,17 @@
               <button type="button" class="vtr-btn vtr-manual-btn" id="ass_build_vtr_manual_btn" data-click="ass_build_toggleVtrManual(this)">✏️ Manual</button>
             </div>
             <div id="ass_build_vtr_manual_wrap" class="hidden mt-8">
-              <div style="display:flex;gap:6px;align-items:center;">
-                <div class="prefix-input" style="flex:1;">
+              <div class="u-flex u-gap-6 u-ai-center">
+                <div class="prefix-input u-flex-1">
                   <span>PM-</span>
                   <input type="text" id="ass_build_vtr_input" placeholder="0000" maxlength="4" inputmode="numeric">
                 </div>
               </div>
             </div>
-            <div id="ass_build_vtr_label" style="display:none;margin-top:8px;padding:6px 12px;border-radius:8px;background:rgba(59,130,246,.12);color:#3b82f6;font-size:13px;font-weight:700;"></div>
-            <div id="ass_build_tipo_section" style="display:none;margin-top:10px;">
-              <div style="font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--label);margin-bottom:6px;">Escala</div>
-              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">
+            <div id="ass_build_vtr_label"></div>
+            <div id="ass_build_tipo_section">
+              <div class="panel-eyebrow u-mb-6">Escala</div>
+              <div class="u-grid u-grid-3 u-gap-6">
                 <button type="button" class="vtr-btn ass-tipo-btn" data-click="ass_build_selecionarTipo(this,'Ordinária')">Ordinária</button>
                 <button type="button" class="vtr-btn ass-tipo-btn" data-click="ass_build_selecionarTipo(this,'Apoio')">Apoio</button>
                 <button type="button" class="vtr-btn ass-tipo-btn" data-click="ass_build_selecionarTipo(this,'Ponte')">Ponte</button>
@@ -158,20 +156,20 @@
                 <button type="button" class="vtr-btn ass-tipo-btn" data-click="ass_build_selecionarTipo(this,'Futebol')">Futebol</button>
                 <button type="button" class="vtr-btn ass-tipo-btn" data-click="ass_build_selecionarTipo(this,'__manual__')">✏️ Manual</button>
               </div>
-              <div id="ass_build_tipo_manual_wrap" class="hidden" style="margin-top:6px;">
-                <input type="text" id="ass_build_tipo_input" placeholder="Tipo de escala..." style="width:100%;" data-input="ass_build_atualizarLabel()">
+              <div id="ass_build_tipo_manual_wrap" class="hidden u-mt-6">
+                <input type="text" id="ass_build_tipo_input" placeholder="Tipo de escala..." data-input="ass_build_atualizarLabel()">
               </div>
             </div>
-            <div style="height:1px;background:var(--border);margin:14px 0;"></div>
+            <div class="section-divider"></div>
           </div>
           <label class="field-label" id="ass_build_pol_label">Policiais desta Viatura</label>
-          <div id="ass_build_grupos_grid" style="display:grid;grid-template-columns:1fr;gap:6px;margin-bottom:10px;">
+          <div id="ass_build_grupos_grid">
             <button type="button" class="vtr-btn" data-click="ass_build_carregarGrupo(this,'efetivo')">Efetivo</button>
           </div>
-          <div id="ass_build_nomes_grid" style="display:none;flex-wrap:wrap;gap:6px;margin-bottom:8px;"></div>
+          <div id="ass_build_nomes_grid"></div>
           <div id="ass_build_manual_pol_wrap" class="hidden">
-            <div style="display:flex;gap:6px;align-items:center;margin-top:4px;">
-              <select id="ass_build_grad_manual" style="flex:0 0 130px;">
+            <div class="u-flex u-gap-6 u-ai-center u-mt-4">
+              <select id="ass_build_grad_manual">
                 <option value="Sd PM">Soldado</option>
                 <option value="Cb PM">Cabo</option>
                 <option value="3º Sgt PM">3º Sgt</option>
@@ -179,29 +177,29 @@
                 <option value="1º Sgt PM">1º Sgt</option>
                 <option value="Sub-Ten PM">Sub-Ten</option>
               </select>
-              <input type="text" id="ass_build_nome_manual" placeholder="Nome do policial" style="flex:1;" data-keydown-enter="ass_build_adicionarManual()">
+              <input type="text" id="ass_build_nome_manual" class="u-flex-1" placeholder="Nome do policial" data-keydown-enter="ass_build_adicionarManual()">
               <button type="button" class="btn btn-sm btn-success" data-click="ass_build_adicionarManual()">+ OK</button>
             </div>
           </div>
-          <button type="button" class="btn btn-sm" style="margin-top:6px;width:100%;" data-click="ass_build_toggleManualPol()">✏️ Adicionar Manualmente</button>
-          <div id="ass_build_pol_chips_wrap" style="display:none;margin-top:8px;">
-            <div style="font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--label);margin-bottom:4px;">Selecionados:</div>
-            <div id="ass_build_pol_chips" style="display:flex;flex-wrap:wrap;gap:5px;"></div>
+          <button type="button" class="btn btn-sm u-mt-6 u-w-full" data-click="ass_build_toggleManualPol()">✏️ Adicionar Manualmente</button>
+          <div id="ass_build_pol_chips_wrap">
+            <div class="panel-eyebrow u-mb-4">Selecionados:</div>
+            <div id="ass_build_pol_chips"></div>
           </div>
-          <div style="height:1px;background:var(--border);margin:14px 0;"></div>
+          <div class="section-divider"></div>
           <label class="field-label" id="ass_build_hor_label">Horário desta Viatura</label>
-          <select id="ass_build_horario" style="width:100%;">
+          <select id="ass_build_horario">
             <option value="06h às 18h">06h às 18h (Diurno)</option>
             <option value="07h às 19h">07h às 19h (Diurno)</option>
             <option value="19h às 07h">19h às 07h (Noturno)</option>
             <option value="13h às 01h">13h às 01h</option>
             <option value="07h às 07h">07h às 07h (24h)</option>
           </select>
-          <button type="button" class="btn btn-primary btn-full" id="ass_build_confirmar_btn" style="margin-top:14px;" data-click="ass_adicionarLote()">+ Confirmar Viatura</button>
+          <button type="button" class="btn btn-primary btn-full u-mt-14" id="ass_build_confirmar_btn" data-click="ass_adicionarLote()">+ Confirmar Viatura</button>
         </div>
 
         <!-- Serviço montado (lista de lotes) -->
-        <div class="form-field" id="ass_lotes_wrap" style="display:none;">
+        <div class="form-field" id="ass_lotes_wrap">
           <label class="field-label">Serviço Montado</label>
           <div id="ass_lotes_lista"></div>
         </div>
@@ -243,10 +241,7 @@
       <div class="result-box" id="ass_result">
         <p class="result-label">Texto gerado</p>
         <div class="result-text" id="ass_resultado"></div>
-        <div class="result-actions">
-          <button class="btn btn-success" data-click="copiar('ass_resultado', this)">📋 Copiar</button>
-          <button class="btn btn-whats"   data-click="whatsapp('ass_resultado')">📲 WhatsApp</button>
-        </div>
+        <div data-component="copy-share-actions" data-copy-action="copiar('ass_resultado', this)" data-share-action="whatsapp('ass_resultado')"></div>
       </div>
     </div>
   </section>
@@ -254,11 +249,8 @@
   <!-- ============================================================
        ENVOLVIDOS
   ============================================================ -->
-  <section id="screen-envolvidos" class="screen">
-    <div class="back-row">
-      <button class="btn" data-click="go('home')">← Voltar</button>
-      <button class="btn btn-danger" data-click="go('ended')">Sair</button>
-    </div>
+  <section id="screen-envolvidos" class="screen" tabindex="-1">
+    <div data-component="screen-nav" data-back-target="home" data-exit-target="ended"></div>
     <div class="card">
       <div class="card-header">
         <div>
@@ -273,11 +265,11 @@
 
       <button class="btn btn-full mt-12" data-click="env_adicionar()" id="env_btn_add">+ Adicionar Envolvido</button>
 
-      <div class="divider mt-12" style="margin-bottom:12px;"></div>
+      <div class="divider mt-12 u-mb-12"></div>
 
       <div class="flex gap-8 flex-wrap">
-        <button class="btn btn-success" style="flex:1" data-click="env_copiar()">📄 Copiar</button>
-        <button class="btn btn-whats"   style="flex:1" data-click="env_whatsapp()">🟢 WhatsApp</button>
+        <button class="btn btn-success u-flex-1" data-click="env_copiar()">📄 Copiar</button>
+        <button class="btn btn-whats u-flex-1" data-click="env_whatsapp()">🟢 WhatsApp</button>
       </div>
     </div>
   </section>
@@ -285,11 +277,8 @@
   <!-- ============================================================
        PMRv
   ============================================================ -->
-  <section id="screen-pmrv" class="screen">
-    <div class="back-row">
-      <button class="btn" data-click="go('home')">← Voltar</button>
-      <button class="btn btn-danger" data-click="go('ended')">Sair</button>
-    </div>
+  <section id="screen-pmrv" class="screen" tabindex="-1">
+    <div data-component="screen-nav" data-back-target="home" data-exit-target="ended"></div>
     <div class="card">
       <div class="report-header">
         <h1>POLÍCIA MILITAR RODOVIÁRIA</h1>
@@ -299,7 +288,7 @@
       <div class="form-grid">
         <!-- Linha 1: SADE + VTR + Rodovia -->
         <div class="form-row form-row-3">
-          <div class="form-field" style="grid-column: span 1;">
+          <div class="form-field form-span-1">
             <label class="field-label">Protocolo SADE</label>
             <input type="text" id="pmrv_sade" placeholder="Nº SADE" data-input="pmrv_atualizar()">
           </div>
@@ -352,7 +341,7 @@
             <div class="radio-row">
               <label><input type="radio" name="pmrv_tipo_hora" id="pmrv_hora_auto" checked data-click="pmrv_atualizar()"> Automático</label>
               <label><input type="radio" name="pmrv_tipo_hora" id="pmrv_hora_manual" data-click="pmrv_atualizar()"> Manual</label>
-              <input type="time" id="pmrv_input_hora" data-input="pmrv_atualizar()" style="width:110px; padding:6px;">
+              <input type="time" id="pmrv_input_hora" data-input="pmrv_atualizar()">
             </div>
           </div>
         </div>
@@ -469,13 +458,13 @@
       </div>
 
       <!-- Resultado em tempo real -->
-      <div class="result-box visible" style="margin-top:20px;">
+      <div class="result-box visible result-box-spaced">
         <p class="result-label">Prévia do relatório</p>
         <div class="result-text" id="pmrv_relatorio"></div>
         <div class="result-actions">
-          <button class="btn"            data-click="pmrv_limpar()">🗑 Limpar</button>
+          <button class="btn" data-click="pmrv_limpar()">🗑 Limpar</button>
           <button class="btn btn-success" data-click="copiar('pmrv_relatorio', this)">📋 Copiar</button>
-          <button class="btn btn-whats"   data-click="pmrv_enviarWhatsApp()">📱 WhatsApp</button>
+          <button class="btn btn-whats" data-click="pmrv_enviarWhatsApp()">📱 WhatsApp</button>
         </div>
       </div>
     </div>
@@ -484,60 +473,54 @@
   <!-- ============================================================
        DANOS APARENTES — INTERATIVO
   ============================================================ -->
-  <section id="screen-danos" class="screen">
-    <div class="back-row">
-      <button class="btn" data-click="go('home')">← Voltar</button>
-      <button class="btn btn-danger" data-click="go('ended')">Sair</button>
-    </div>
+  <section id="screen-danos" class="screen" tabindex="-1">
+    <div data-component="screen-nav" data-back-target="home" data-exit-target="ended"></div>
 
     <!-- STEP 1: escolher veículo -->
     <div class="card" id="dan-step-vehicle">
       <h2 class="card-title">Selecione o tipo de veículo</h2>
-      <p class="card-sub" style="margin-bottom:14px;">Toque no veículo envolvido no sinistro</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <p class="card-sub u-mb-14">Toque no veículo envolvido no sinistro</p>
+      <div class="vehicle-picker-grid">
         <button class="dan-veh-btn" id="dan-btn-carro" data-click="danEscolherVeiculo('carro')">
-          <img src="img/extracted_6.png" alt="Carro" style="height:80px;width:auto;object-fit:contain;margin-bottom:6px;display:block;">
-          <span style="font-family:var(--font-display);font-size:18px;font-weight:900;">Carro</span>
+          <img src="img/extracted_6.png" alt="Carro" class="vehicle-picker-image">
+          <span class="vehicle-picker-label">Carro</span>
         </button>
         <button class="dan-veh-btn" id="dan-btn-moto" data-click="danEscolherVeiculo('moto')">
-          <img src="img/extracted_7.png" alt="Motocicleta" style="height:80px;width:auto;object-fit:contain;margin-bottom:6px;display:block;">
-          <span style="font-family:var(--font-display);font-size:18px;font-weight:900;">Motocicleta</span>
+          <img src="img/extracted_7.png" alt="Motocicleta" class="vehicle-picker-image">
+          <span class="vehicle-picker-label">Motocicleta</span>
         </button>
       </div>
-      <div id="dan-salvos-area" style="display:none;margin-top:16px;">
-        <div style="height:1px;background:var(--border);margin-bottom:14px;"></div>
-        <div style="font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--label);margin-bottom:10px;">Veículos adicionados</div>
+      <div id="dan-salvos-area">
+        <div class="section-divider u-mb-14"></div>
+        <div class="panel-eyebrow u-mb-10">Veículos adicionados</div>
         <div id="dan-salvos-lista"></div>
-        <div style="height:1px;background:var(--border);margin:14px 0;"></div>
+        <div class="section-divider"></div>
         <button class="btn btn-primary btn-full btn-lg" data-click="danGerarTextoTodos()">⚡ Gerar Relatório de Todos</button>
-        <div id="dan-todos-result-area" style="display:none;margin-top:14px;">
+        <div id="dan-todos-result-area">
           <div class="result-text" id="dan-todos-result-text"></div>
-          <div class="result-actions">
-            <button class="btn btn-success" data-click="danTodosCopiar(this)">📋 Copiar</button>
-            <button class="btn btn-whats" data-click="danTodosWhatsApp()">📲 WhatsApp</button>
-          </div>
+          <div data-component="copy-share-actions" data-copy-action="danTodosCopiar(this)" data-share-action="danTodosWhatsApp()"></div>
         </div>
       </div>
     </div>
 
     <!-- STEP 2: diagrama interativo -->
-    <div id="dan-step-diagram" style="display:none;">
-      <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
+    <div id="dan-step-diagram">
+      <div class="action-toolbar u-mb-12">
         <button class="btn" data-click="danVoltarStep1()">← Trocar veículo</button>
         <button class="btn btn-danger" data-click="danLimparTudo()">🗑 Limpar tudo</button>
       </div>
 
       <div class="card">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px;">
+        <div class="u-flex u-ai-start u-jc-between u-gap-12 u-wrap u-mb-14">
           <div>
             <h2 class="card-title" id="dan-diag-title">Danos Aparentes — Carro</h2>
             <p class="card-sub">Toque nos pontos numerados para registrar o dano</p>
           </div>
-          <span id="dan-veh-badge" style="font-size:28px;"></span>
+          <span id="dan-veh-badge"></span>
         </div>
 
         <!-- Tabs de vista -->
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:14px;">
+        <div class="u-grid u-grid-4 u-gap-6 u-mb-14">
           <button class="dan-tab active" id="dan-tab-frontal"  data-click="danMudarVista('frontal')">
             <img class="dan-tab-thumb" src="carro_frente_nobg.png" alt="Frente">
             Frontal
@@ -557,67 +540,50 @@
         </div>
 
         <!-- SVG area -->
-        <div id="dan-diagram-area" style="background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;min-height:220px;"></div>
-        <div id="dan-part-readout" style="margin-top:8px;padding:10px 12px;border:1px dashed var(--border);border-radius:12px;background:rgba(245,130,32,.06);font-size:13px;color:var(--text);font-weight:700;min-height:42px;display:flex;align-items:center;">Passe ou toque em um círculo para ver o nome da peça.</div>
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;flex-wrap:wrap;gap:6px;">
-          <p style="font-size:11px;color:var(--label);margin:0;" id="dan-hint-txt">Toque num círculo → escolha o tipo de dano</p>
+        <div id="dan-diagram-area"></div>
+        <div id="dan-part-readout" class="detail-readout">Passe ou toque em um círculo para ver o nome da peça.</div>
+        <div class="u-flex u-ai-center u-jc-between u-wrap u-gap-6 u-mt-8">
+          <p id="dan-hint-txt">Toque num círculo → escolha o tipo de dano</p>
         </div>
       </div>
 
       <!-- Summary + resultado -->
-      <div class="card" style="margin-top:12px;">
-        <div style="font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--label);margin-bottom:10px;">Danos registrados</div>
+      <div class="card u-mt-12">
+        <div class="panel-eyebrow u-mb-10">Danos registrados</div>
         <div id="dan-summary-tags">
-          <div style="font-size:13px;color:var(--label);text-align:center;padding:18px;border:1px dashed var(--border);border-radius:10px;">Nenhum dano registrado ainda.<br>Toque nos pontos do diagrama.</div>
+          <div class="empty-state-card">Nenhum dano registrado ainda.<br>Toque nos pontos do diagrama.</div>
         </div>
-        <div style="height:1px;background:var(--border);margin:14px 0;"></div>
-        <button class="btn btn-success btn-full" style="margin-bottom:8px;" data-click="danSalvarVeiculo()">💾 Salvar este veículo</button>
+        <div class="section-divider"></div>
+        <button class="btn btn-success btn-full u-mb-8" data-click="danSalvarVeiculo()">💾 Salvar este veículo</button>
         <button class="btn btn-primary btn-full btn-lg" data-click="danGerarTexto()">⚡ Gerar Relatório</button>
-        <div id="dan-result-area" style="display:none;margin-top:14px;">
+        <div id="dan-result-area">
           <div class="result-text" id="dan-result-text"></div>
-          <div class="result-actions">
-            <button class="btn btn-success" data-click="danCopiar(this)">📋 Copiar</button>
-            <button class="btn btn-whats"   data-click="danWhatsApp()">📲 WhatsApp</button>
-          </div>
+          <div data-component="copy-share-actions" data-copy-action="danCopiar(this)" data-share-action="danWhatsApp()"></div>
         </div>
       </div>
 
       <!-- Fotos dos danos — Carro -->
-      <div class="card" style="margin-top:12px;">
-        <div style="font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--label);margin-bottom:10px;">📷 Fotos dos Danos</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px;">
-          <label class="foto-label" style="flex-direction:column;padding:12px 6px;font-size:12px;">
-            <span style="font-size:20px;margin-bottom:3px;">📷</span>Tirar Foto
-            <input type="file" accept="image/*" capture="environment" multiple style="display:none;" data-change="danFotoMiniatura(this,'dan-foto-grid-carro','dan-foto-actions-carro')">
-          </label>
-          <label class="foto-label" style="flex-direction:column;padding:12px 6px;font-size:12px;">
-            <span style="font-size:20px;margin-bottom:3px;">🖼️</span>Anexar Imagem
-            <input type="file" accept="image/*" multiple style="display:none;" data-change="danFotoMiniatura(this,'dan-foto-grid-carro','dan-foto-actions-carro')">
-          </label>
-        </div>
-        <div class="foto-grid" id="dan-foto-grid-carro"></div>
-        <div id="dan-foto-actions-carro" style="display:none;gap:6px;flex-wrap:wrap;margin-top:8px;">
-          <button type="button" class="btn btn-sm btn-whats" data-click="danFotoCompartilhar('dan-foto-grid-carro')">📲 Compartilhar Fotos</button>
-          <button type="button" class="btn btn-sm btn-danger" data-click="danFotoLimpar('dan-foto-grid-carro','dan-foto-actions-carro')">🗑 Remover Todas</button>
-        </div>
+      <div class="card u-mt-12">
+        <div class="panel-eyebrow u-mb-10">📷 Fotos dos Danos</div>
+        <div data-component="photo-upload" data-grid-id="dan-foto-grid-carro" data-actions-id="dan-foto-actions-carro" data-change-handler="danFotoMiniatura(this,'dan-foto-grid-carro','dan-foto-actions-carro')"></div>
       </div>
     </div>
 
-    <div id="dan-step-moto360" style="display:none;">
-      <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
+    <div id="dan-step-moto360">
+      <div class="action-toolbar u-mb-12">
         <button class="btn" data-click="danVoltarStep1()">← Trocar veículo</button>
         <button class="btn btn-danger" data-click="v360limpar()">🗑 Limpar tudo</button>
       </div>
 
       <div class="card">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px;">
+        <div class="u-flex u-ai-start u-jc-between u-gap-12 u-wrap u-mb-14">
           <div>
             <h2 class="card-title">🏍️ Danos Aparentes — Motocicleta</h2>
             <p class="card-sub" id="v360-hint-txt">Toque nos círculos para registrar os danos.</p>
           </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:14px;">
+        <div class="u-grid u-grid-4 u-gap-6 u-mb-14">
           <button class="dan-tab active" id="v360-tab-frente"   data-click="v360switchTab(this,'frente')">
             <img class="dan-tab-thumb" src="" id="dan-thumb-frente" alt="Frente">
             Frente
@@ -646,48 +612,31 @@
           </div>
           <div class="v360-legend">
               <div class="v360-legend-header">🏍️ Peças — soltar em: <span id="v360-leg-vista">FRENTE</span></div>
-              <div style="padding:4px 12px 5px;font-size:11px;color:var(--muted);border-bottom:1px solid var(--border);background:rgba(245,158,11,.06);">Clique no ◯ na foto para classificar o dano</div>
+              <div class="legend-helper">Clique no ◯ na foto para classificar o dano</div>
               <div class="v360-legend-scroll" id="v360-legend-list"></div>
           </div>
         </div>
-        <div id="v360-part-readout" style="margin-top:8px;padding:10px 12px;border:1px dashed var(--border);border-radius:12px;background:rgba(245,130,32,.06);font-size:13px;color:var(--text);font-weight:700;min-height:42px;display:flex;align-items:center;">Toque em um círculo para ver o nome da peça selecionada.</div>
+        <div id="v360-part-readout" class="detail-readout">Toque em um círculo para ver o nome da peça selecionada.</div>
       </div>
 
-      <div class="card" style="margin-top:12px;">
-        <div style="font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--label);margin-bottom:10px;">Danos registrados</div>
+      <div class="card u-mt-12">
+        <div class="panel-eyebrow u-mb-10">Danos registrados</div>
         <div id="v360-summary-tags">
-          <div style="font-size:13px;color:var(--label);text-align:center;padding:18px;border:1px dashed var(--border);border-radius:10px;">Nenhum dano registrado ainda.<br>Toque nos pontos da foto.</div>
+          <div class="empty-state-card">Nenhum dano registrado ainda.<br>Toque nos pontos da foto.</div>
         </div>
-        <div style="height:1px;background:var(--border);margin:14px 0;"></div>
-        <button class="btn btn-success btn-full" style="margin-bottom:8px;" data-click="danSalvarVeiculo()">💾 Salvar este veículo</button>
+        <div class="section-divider"></div>
+        <button class="btn btn-success btn-full u-mb-8" data-click="danSalvarVeiculo()">💾 Salvar este veículo</button>
         <button class="btn btn-primary btn-full btn-lg" data-click="danGerarTexto()">⚡ Gerar Relatório</button>
-        <div id="v360-result-area" style="display:none;margin-top:14px;">
+        <div id="v360-result-area">
           <div class="result-text" id="v360-result-text"></div>
-          <div class="result-actions">
-            <button class="btn btn-success" data-click="v360Copiar(this)">📋 Copiar</button>
-            <button class="btn btn-whats" data-click="v360WhatsApp()">📲 WhatsApp</button>
-          </div>
+          <div data-component="copy-share-actions" data-copy-action="v360Copiar(this)" data-share-action="v360WhatsApp()"></div>
         </div>
       </div>
 
       <!-- Fotos dos danos — Moto -->
-      <div class="card" style="margin-top:12px;">
-        <div style="font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--label);margin-bottom:10px;">📷 Fotos dos Danos</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px;">
-          <label class="foto-label" style="flex-direction:column;padding:12px 6px;font-size:12px;">
-            <span style="font-size:20px;margin-bottom:3px;">📷</span>Tirar Foto
-            <input type="file" accept="image/*" capture="environment" multiple style="display:none;" data-change="danFotoMiniatura(this,'dan-foto-grid-moto','dan-foto-actions-moto')">
-          </label>
-          <label class="foto-label" style="flex-direction:column;padding:12px 6px;font-size:12px;">
-            <span style="font-size:20px;margin-bottom:3px;">🖼️</span>Anexar Imagem
-            <input type="file" accept="image/*" multiple style="display:none;" data-change="danFotoMiniatura(this,'dan-foto-grid-moto','dan-foto-actions-moto')">
-          </label>
-        </div>
-        <div class="foto-grid" id="dan-foto-grid-moto"></div>
-        <div id="dan-foto-actions-moto" style="display:none;gap:6px;flex-wrap:wrap;margin-top:8px;">
-          <button type="button" class="btn btn-sm btn-whats" data-click="danFotoCompartilhar('dan-foto-grid-moto')">📲 Compartilhar Fotos</button>
-          <button type="button" class="btn btn-sm btn-danger" data-click="danFotoLimpar('dan-foto-grid-moto','dan-foto-actions-moto')">🗑 Remover Todas</button>
-        </div>
+      <div class="card u-mt-12">
+        <div class="panel-eyebrow u-mb-10">📷 Fotos dos Danos</div>
+        <div data-component="photo-upload" data-grid-id="dan-foto-grid-moto" data-actions-id="dan-foto-actions-moto" data-change-handler="danFotoMiniatura(this,'dan-foto-grid-moto','dan-foto-actions-moto')"></div>
       </div>
     </div>
 
@@ -696,60 +645,57 @@
   <!-- ============================================================
        RELATÓRIO COMPLETO
   ============================================================ -->
-  <section id="screen-relatorio" class="screen">
-    <div class="back-row">
-      <button class="btn" data-click="go('home')">← Voltar</button>
-      <button class="btn btn-danger" data-click="go('ended')">Sair</button>
+  <section id="screen-relatorio" class="screen" tabindex="-1">
+    <div data-component="screen-nav" data-back-target="home" data-exit-target="ended"></div>
+
+    <div class="card report-hero-card">
+      <div class="report-hero-icon">📋</div>
+      <div class="section-title report-hero-title">Relatório Completo</div>
+      <div class="report-hero-sub">Consolida envolvidos + danos aparentes em um único relatório</div>
     </div>
 
-    <div class="card" style="border-left:4px solid #8b5cf6;margin-bottom:4px;">
-      <div style="font-size:30px;margin-bottom:6px;">📋</div>
-      <div class="screen-title" style="margin:0 0 4px;">Relatório Completo</div>
-      <div style="color:var(--muted);font-size:13px;">Consolida envolvidos + danos aparentes em um único relatório</div>
-    </div>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
-      <div class="card" style="text-align:center;padding:16px 10px;">
-        <div id="rel-count-env" style="font-size:32px;font-weight:900;color:#22c55e;">—</div>
-        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;">Envolvidos</div>
+    <div class="report-stats-grid">
+      <div class="card report-stat-card">
+        <div id="rel-count-env" class="report-stat-value-success">—</div>
+        <div class="report-stat-label">Envolvidos</div>
       </div>
-      <div class="card" style="text-align:center;padding:16px 10px;">
-        <div id="rel-count-dan" style="font-size:32px;font-weight:900;color:#f59e0b;">—</div>
-        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;">Veíc. c/ Danos</div>
+      <div class="card report-stat-card">
+        <div id="rel-count-dan" class="report-stat-value-warning">—</div>
+        <div class="report-stat-label">Veíc. c/ Danos</div>
       </div>
     </div>
 
-    <div class="card" style="margin-bottom:10px;">
-      <div style="font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--label);margin-bottom:10px;">📍 Fotos do Local</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px;">
-        <label class="foto-label" style="flex-direction:column;padding:12px 6px;font-size:12px;">
-          <span style="font-size:20px;margin-bottom:3px;">📷</span>Tirar Foto
-          <input type="file" accept="image/*" capture="environment" multiple style="display:none;" data-change="relFull_fotoMiniatura(this)">
+    <div class="card u-mb-10">
+      <div class="panel-eyebrow u-mb-10">📍 Fotos do Local</div>
+      <div class="photo-upload-grid">
+        <label class="foto-label photo-upload-label">
+          <span class="photo-upload-icon">📷</span>Tirar Foto
+          <input type="file" accept="image/*" capture="environment" multiple class="u-hidden-input" data-change="relFull_fotoMiniatura(this)">
         </label>
-        <label class="foto-label" style="flex-direction:column;padding:12px 6px;font-size:12px;">
-          <span style="font-size:20px;margin-bottom:3px;">🖼️</span>Anexar Imagem
-          <input type="file" accept="image/*" multiple style="display:none;" data-change="relFull_fotoMiniatura(this)">
+        <label class="foto-label photo-upload-label">
+          <span class="photo-upload-icon">🖼️</span>Anexar Imagem
+          <input type="file" accept="image/*" multiple class="u-hidden-input" data-change="relFull_fotoMiniatura(this)">
         </label>
       </div>
       <div class="foto-grid" id="rel-local-grid"></div>
-      <div id="rel-local-actions" style="display:none;gap:6px;flex-wrap:wrap;margin-top:8px;">
+      <div id="rel-local-actions" class="action-toolbar-compact u-mt-8">
         <button type="button" class="btn btn-sm btn-danger" data-click="relFull_limparFotosLocal()">🗑 Remover Fotos do Local</button>
       </div>
-      <div style="font-size:11px;color:var(--muted);margin-top:8px;">Limite: até 2 fotos do local do sinistro.</div>
+      <div class="form-helper-note">Limite: até 2 fotos do local do sinistro.</div>
     </div>
 
-    <button class="btn btn-primary btn-lg btn-full" data-click="relFull_gerar()" style="background:linear-gradient(135deg,#7c3aed,#8b5cf6);">🔄 Gerar Relatório Completo</button>
+    <button class="btn btn-primary btn-lg btn-full rel-generate-btn" data-click="relFull_gerar()">🔄 Gerar Relatório Completo</button>
 
-    <div id="rel-result-area" style="display:none;margin-top:14px;">
+    <div id="rel-result-area">
       <div class="card">
-        <div style="font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--label);margin-bottom:8px;">📄 Texto do Relatório</div>
-        <pre id="rel-result-text" style="white-space:pre-wrap;font-size:12px;line-height:1.6;color:var(--text);font-family:inherit;max-height:360px;overflow-y:auto;"></pre>
+        <div class="panel-eyebrow u-mb-8">📄 Texto do Relatório</div>
+        <pre id="rel-result-text" class="report-output-text"></pre>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;">
+      <div class="two-column-actions-spaced">
         <button class="btn btn-success btn-lg" data-click="relFull_copiar(this)">📋 Copiar</button>
         <button class="btn btn-whats btn-lg" data-click="relFull_whatsapp()">📲 WhatsApp</button>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;">
+      <div class="two-column-actions-spaced">
         <button class="btn btn-lg" data-click="relFull_baixar()">💾 Baixar texto (.txt)</button>
         <button class="btn btn-lg btn-whats" data-click="relFull_compartilharFotos()">📷 Compartilhar só as fotos</button>
       </div>
@@ -759,24 +705,22 @@
   <!-- ============================================================
        CONSULTA DE INFRAÇÕES
   ============================================================ -->
-  <section id="screen-infracoes" class="screen screen-app">
-    <div class="back-row">
-      <button class="btn" data-click="go('home')">← Voltar</button>
-      <button class="btn btn-danger" data-click="go('ended')">Sair</button>
-    </div>
+  <section id="screen-infracoes" class="screen screen-app" tabindex="-1">
+    <div data-component="screen-nav" data-back-target="home" data-exit-target="ended"></div>
 
     <div class="card infra-page">
       <div class="infra-hero">
         <div class="infra-hero-copy">
+          <span class="infra-kicker">Módulo de bolso</span>
           <h2 class="card-title infra-title">Consulta de Infrações</h2>
-          <p class="card-sub infra-sub">Pesquisa direta na base local com filtros por texto, categoria e medida administrativa, sem abrir outra página.</p>
+          <p class="card-sub infra-sub">Fluxo compacto para pesquisa rápida em campo, com atalhos, filtros objetivos e leitura vertical.</p>
         </div>
       </div>
 
-      <div class="infra-filter-grid">
+      <form class="infra-filter-grid" aria-label="Filtros da consulta de infrações">
         <div class="form-field">
           <label class="field-label" for="infra_search">Busca geral</label>
-          <input id="infra_search" type="search" placeholder="Código, descrição, artigo, categoria, infrator ou medida">
+          <input id="infra_search" type="search" placeholder="Ex.: sem CNH, 165-A, celular, licenciamento" aria-describedby="infra_summary">
         </div>
         <div class="form-field">
           <label class="field-label" for="infra_category">Categoria</label>
@@ -794,15 +738,22 @@
           <label class="field-label">Ações</label>
           <button id="infra_clear" class="btn btn-primary btn-full" type="button">Limpar filtros</button>
         </div>
-      </div>
+      </form>
 
       <div class="infra-tabs" role="tablist" aria-label="Seções da consulta de infrações">
-        <button id="infra_tab_consulta" class="infra-tab-btn active" type="button" data-click="infra_showTab('consulta')">Consulta</button>
-        <button id="infra_tab_frequentes" class="infra-tab-btn" type="button" data-click="infra_showTab('frequentes')">Infrações Frequente</button>
+        <button id="infra_tab_consulta" class="infra-tab-btn active" type="button" role="tab" aria-selected="true" aria-controls="infra_panel_consulta" data-click="infra_showTab('consulta')">Consulta</button>
+        <button id="infra_tab_frequentes" class="infra-tab-btn" type="button" role="tab" aria-selected="false" aria-controls="infra_panel_frequentes" data-click="infra_showTab('frequentes')">Infrações Frequentes</button>
       </div>
 
-      <div id="infra_panel_consulta" class="infra-tab-panel active">
-        <div class="infra-stats">
+      <section id="infra_panel_consulta" class="infra-tab-panel active" role="tabpanel" aria-labelledby="infra_tab_consulta">
+        <nav class="infra-pocket-strip" aria-label="Atalhos rápidos de bolso">
+          <button class="infra-quick-chip" type="button" data-click="infra_applyShortcut('sem cnh')">Sem CNH</button>
+          <button class="infra-quick-chip" type="button" data-click="infra_applyShortcut('celular')">Celular</button>
+          <button class="infra-quick-chip" type="button" data-click="infra_applyShortcut('recusar bafometro')">Etilômetro</button>
+          <button class="infra-quick-chip" type="button" data-click="infra_applyShortcut('nao licenciado')">Licenciamento</button>
+        </nav>
+
+        <section class="infra-stats" aria-label="Resumo da base de infrações">
           <article class="infra-stat">
             <span class="infra-stat-label">Total de infrações</span>
             <strong id="infra_totalCount">0</strong>
@@ -815,38 +766,33 @@
             <span class="infra-stat-label">Categorias</span>
             <strong id="infra_categoryCount">0</strong>
           </article>
-        </div>
+        </section>
 
-        <div class="infra-panel">
-          <div class="infra-panel-head">
+        <section class="infra-panel" aria-labelledby="infra_status">
+          <header class="infra-panel-head">
             <div>
-              <div id="infra_status" class="infra-status">Carregando base...</div>
-              <p id="infra_summary" class="infra-summary">Aguarde enquanto os registros são preparados.</p>
+              <h3 id="infra_status" class="infra-status">Carregando base...</h3>
+              <p id="infra_summary" class="infra-summary" aria-live="polite">Aguarde enquanto os registros são preparados.</p>
             </div>
+          </header>
+
+          <div class="infra-results-head" aria-hidden="true">
+            <strong>Resultados rápidos</strong>
+            <span>Lista vertical para consulta em celular</span>
           </div>
 
-          <div class="infra-table-wrap">
-            <table class="infra-table">
-              <thead>
-                <tr>
-                  <th>Código</th>
-                  <th>Descrição</th>
-                  <th>Artigo / Decreto</th>
-                  <th>Infrator</th>
-                  <th>Categoria</th>
-                  <th>Medida administrativa</th>
-                  <th>Valor</th>
-                </tr>
-              </thead>
+          <ul class="infra-card-list" id="infra_cards" aria-live="polite"></ul>
+          <div class="infra-table-wrap infra-table-wrap-hidden" aria-hidden="true">
+            <table class="infra-table" aria-hidden="true">
               <tbody id="infra_tableBody"></tbody>
             </table>
-            <div id="infra_emptyState" class="infra-empty" hidden>Nenhum resultado encontrado para os filtros atuais.</div>
           </div>
-        </div>
-      </div>
+          <p id="infra_emptyState" class="infra-empty" hidden>Nenhum resultado encontrado para os filtros atuais.</p>
+        </section>
+      </section>
 
-      <div id="infra_panel_frequentes" class="infra-tab-panel" hidden>
-        <div class="infra-frequent-grid">
+      <section id="infra_panel_frequentes" class="infra-tab-panel" role="tabpanel" aria-labelledby="infra_tab_frequentes" hidden>
+        <div class="infra-frequent-grid" aria-label="Lista de infrações frequentes">
           <button class="infra-frequent-card" type="button" data-click="infra_applyShortcut('5010-0')">
             <span class="infra-frequent-code">Código: 5010-0</span>
             <strong>Dirigir sem CNH/PPD/ACC</strong>
@@ -908,6 +854,25 @@
             <span class="infra-frequent-art">Art. 193</span>
           </button>
         </div>
+      </section>
+
+      <div class="infra-bottom-bar" role="toolbar" aria-label="Ações rápidas de uma mão">
+        <button class="infra-bottom-btn" type="button" data-click="infra_focusSearch()">
+          <span class="infra-bottom-icon">Busca</span>
+          <strong>Buscar</strong>
+        </button>
+        <button class="infra-bottom-btn" type="button" data-click="infra_showTab('frequentes')">
+          <span class="infra-bottom-icon">Atalhos</span>
+          <strong>Frequentes</strong>
+        </button>
+        <button class="infra-bottom-btn" type="button" data-click="infra_clearFilters()">
+          <span class="infra-bottom-icon">Limpar</span>
+          <strong>Resetar</strong>
+        </button>
+        <button class="infra-bottom-btn infra-bottom-btn-primary" type="button" data-click="infra_scrollTop()">
+          <span class="infra-bottom-icon">Topo</span>
+          <strong>Subir</strong>
+        </button>
       </div>
     </div>
   </section>
@@ -915,11 +880,8 @@
   <!-- ============================================================
        AJUDA
   ============================================================ -->
-  <section id="screen-help" class="screen">
-    <div class="back-row">
-      <button class="btn" data-click="go('home')">← Voltar</button>
-      <button class="btn btn-danger" data-click="go('ended')">Sair</button>
-    </div>
+  <section id="screen-help" class="screen" tabindex="-1">
+    <div data-component="screen-nav" data-back-target="home" data-exit-target="ended"></div>
     <div class="card">
       <div class="card-header">
         <div>
@@ -1023,7 +985,7 @@
   <!-- ============================================================
        ENCERRADO
   ============================================================ -->
-  <section id="screen-ended" class="screen">
+  <section id="screen-ended" class="screen" tabindex="-1">
     <div class="card ended-box">
       <div class="ended-icon">🚔</div>
       <h2 class="ended-title">Aplicativo encerrado</h2>
@@ -1037,12 +999,12 @@
     <div class="app-footer-text">Desenvolvido por <span class="app-footer-author">Cabo Jeferson</span></div>
   </footer>
 
-</div><!-- /.app -->
+</main><!-- /.app -->
 
 <div id="dan-hover-tooltip" aria-hidden="true"></div>
 
 <!-- Modal fora do app para garantir z-index correto -->
-<div id="dan-modal-global" data-click="danFecharModalFora(event)" role="dialog" aria-modal="true" aria-label="Selecionar tipo de dano">
+<div id="dan-modal-global" data-click="danFecharModalFora(event)" role="dialog" aria-modal="true" aria-labelledby="dan-modal-title-g" aria-describedby="dan-modal-sub-g" hidden>
   <div class="dan-modal-inner">
     <div class="dan-modal-head">
       <div id="dan-modal-title-g" class="dan-modal-title"></div>
@@ -1062,19 +1024,19 @@
 </div>
 
 <!-- Modal Galeria de Fotos -->
-<div id="foto-galeria-overlay" data-click="env_fecharGaleriaOnBackdrop(event)">
+<div id="foto-galeria-overlay" data-click="env_fecharGaleriaOnBackdrop(event)" role="dialog" aria-modal="true" aria-labelledby="foto-galeria-titulo" hidden>
   <div class="foto-galeria-header">
-    <span class="foto-galeria-titulo"></span>
+    <span class="foto-galeria-titulo" id="foto-galeria-titulo"></span>
     <button class="btn btn-sm btn-danger" data-click="env_fecharGaleria()">✕ Fechar</button>
   </div>
   <div class="foto-galeria-grid"></div>
   <div class="foto-galeria-actions">
-    <button class="btn btn-whats btn-lg" style="flex:1" data-click="env_whatsappFotos()">📲 Salvar e Enviar p/ WhatsApp</button>
+    <button class="btn btn-whats btn-lg u-flex-1" data-click="env_whatsappFotos()">📲 Salvar e Enviar p/ WhatsApp</button>
   </div>
 </div>
 
 <!-- Modal v360 Motocicleta -->
-<div class="v360-overlay" id="v360-overlay" data-click="v360closeModalOnBackdrop(event)">
+<div class="v360-overlay" id="v360-overlay" data-click="v360closeModalOnBackdrop(event)" role="dialog" aria-modal="true" aria-labelledby="v360-m-title" aria-describedby="v360-m-sub" hidden>
   <div class="v360-modal">
     <h3 id="v360-m-title"></h3>
     <p id="v360-m-sub">Selecione o tipo de avaria.</p>
@@ -1085,7 +1047,7 @@
       <button class="v360-dbtn v360-d-trincou"  data-val="Trincado"  data-click="v360saveModal('Trincado')"><span class="opt-emoji">🔍</span>Trincado<span class="opt-desc">Fissura visível</span></button>
     </div>
     <div class="v360-modal-foot">
-      <button class="btn btn-danger btn-full" id="v360-btn-pend" style="display:none;" data-click="v360clearDano()">✕ Remover dano</button>
+      <button class="btn btn-danger btn-full" id="v360-btn-pend" data-click="v360clearDano()">✕ Remover dano</button>
       <button class="btn btn-full" data-click="v360closeModal()">Cancelar</button>
     </div>
   </div>
@@ -1100,7 +1062,6 @@
   <script src="js/pmrv.js"></script>
   <script src="js/danos.js"></script>
   <script src="js/relatorio.js"></script>
-  <script src="js/infracoes-data.js"></script>
   <script src="js/infracoes.js"></script>
 
 </body>
