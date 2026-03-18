@@ -1,0 +1,1113 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Ferramenta 4 em 1 para PMRv - Iniciando o Serviço, Envolvidos, Relatório e Danos" />
+  <meta name="theme-color" content="#07090f" />
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <title>4 em 1 · PMRv</title>
+
+    <link rel="stylesheet" href="css/inlined.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+<div class="app" role="main">
+
+  <!-- ============================================================
+       TOPBAR
+  ============================================================ -->
+  <header class="topbar" role="banner">
+    <div class="brand">
+      <img src="img/extracted_1.png" alt="Brasão PMRv" class="brand-logo" aria-hidden="true" />
+      
+      <span class="brand-pill" aria-label="Sistema PMRv 4 em 1 - Online">
+        <span class="brand-dot" aria-hidden="true"></span>
+        PMRv · 4 em 1
+      </span>
+      <span class="brand-title">Padronização e Otimização</span>
+    </div>
+    <nav class="topbar-actions" aria-label="Navegação principal">
+      <button class="btn" data-click="go('home')" aria-label="Ir para o menu principal">Menu</button>
+      <button class="btn" data-click="go('help')" aria-label="Abrir ajuda">Ajuda</button>
+      <button class="btn btn-danger" data-click="go('ended')" aria-label="Encerrar sessão">Sair</button>
+    </nav>
+  </header>
+
+  <!-- ============================================================
+       HOME
+  ============================================================ -->
+  <section id="screen-home" class="screen active" aria-label="Menu principal">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h2 class="card-title">O que você precisa?</h2>
+          <p class="card-sub">Escolha o módulo para começar.</p>
+        </div>
+      </div>
+
+      <div class="menu-grid" role="navigation" aria-label="Módulos disponíveis">
+        <button class="menu-card" data-color="blue" data-click="go('assumir')">
+          <div class="menu-icon"><img src="img/extracted_2.png" alt="Viatura PMRv" class="menu-icon-img menu-icon-img-vtr" /></div>
+          <div class="menu-title">Iniciando o Serviço</div>
+          <div class="menu-desc">Gerar texto de início de serviço</div>
+          <span class="menu-arrow">›</span>
+        </button>
+
+        <button class="menu-card" data-color="amber" data-click="go('infracoes')">
+          <div class="menu-icon"><img src="infrações.png" alt="Consulta de Infrações" class="menu-icon-img menu-icon-img-infra" /></div>
+          <div class="menu-title">Consulta de Infrações</div>
+          <div class="menu-desc">Pesquisar diretamente na base local do aplicativo</div>
+          <span class="menu-arrow">›</span>
+        </button>
+
+        <button class="menu-card" data-color="green" data-click="go('envolvidos')">
+          <div class="menu-icon"><img src="img/extracted_3.png" alt="Relato de Envolvidos" class="menu-icon-img menu-icon-img-env" /></div>
+          <div class="menu-title">Relato de Envolvidos</div>
+          <div class="menu-desc">Registro de sinistro + fotos</div>
+          <span class="menu-arrow">›</span>
+        </button>
+
+        <button class="menu-card" data-color="amber" data-click="go('pmrv')">
+          <div class="menu-icon"><img src="img/extracted_4.png" alt="Relato Policial" class="menu-icon-img menu-icon-img-pmrv" /></div>
+          <div class="menu-title">Relato Policial</div>
+          <div class="menu-desc">Posto 19 · copiar / WhatsApp</div>
+          <span class="menu-arrow">›</span>
+        </button>
+
+        <button class="menu-card" data-color="red" data-click="go('danos')">
+          <div class="menu-icon"><img src="img/extracted_5.png" alt="Danos Aparentes" class="menu-icon-img menu-icon-img-danos" /></div>
+          <div class="menu-title">Danos Aparentes</div>
+          <div class="menu-desc">Registrar avarias por veículo</div>
+          <span class="menu-arrow">›</span>
+        </button>
+
+        <button class="menu-card" data-color="purple" data-click="go('relatorio')">
+          <div class="menu-icon"><img src="relatorio.png" class="menu-icon-img menu-icon-img-rel" alt="Relatório Completo"></div>
+          <div class="menu-title">Relatório Completo</div>
+          <div class="menu-desc">Envolvidos + Danos em um relatório</div>
+          <span class="menu-arrow">›</span>
+        </button>
+
+        <button class="menu-card" data-color="blue" data-click="go('help')">
+          <div class="menu-icon"><img src="AJUDA.png" alt="Ajuda" class="menu-icon-img menu-icon-img-help" /></div>
+          <div class="menu-title">Ajuda</div>
+          <div class="menu-desc">Manual de uso de cada opção</div>
+          <span class="menu-arrow">›</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       INICIANDO O SERVIÇO
+  ============================================================ -->
+  <section id="screen-assumir" class="screen">
+    <div class="back-row">
+      <button class="btn" data-click="go('home')">← Voltar</button>
+      <button class="btn btn-danger" data-click="go('ended')">Sair</button>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h2 class="card-title">🚔 Iniciando o Serviço</h2>
+          <p class="card-sub">Gerar texto de início de serviço para envio</p>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <!-- Mesa -->
+        <div class="form-field">
+          <button id="ass_mesa_btn" type="button" class="vtr-btn" style="width:100%;font-size:15px;padding:12px;" data-click="ass_toggleMesa()">🪑 Recepção do P19</button>
+        </div>
+
+        <!-- Builder: Viatura + Policiais -->
+        <div class="form-field" id="ass_builder_wrap">
+          <div id="ass_build_vtr_section">
+            <label class="field-label">Adicionar Viatura</label>
+            <div class="vtr-grid" id="ass_build_vtr_grid">
+              <button type="button" class="vtr-btn" data-click="ass_build_selecionarVtr(this,'0005')">PM-0005</button>
+              <button type="button" class="vtr-btn" data-click="ass_build_selecionarVtr(this,'0070')">PM-0070</button>
+              <button type="button" class="vtr-btn" data-click="ass_build_selecionarVtr(this,'5312')">PM-5312</button>
+              <button type="button" class="vtr-btn" data-click="ass_build_selecionarVtr(this,'6997')">PM-6997</button>
+              <button type="button" class="vtr-btn" data-click="ass_build_selecionarVtr(this,'5484')">PM-5484</button>
+              <button type="button" class="vtr-btn" data-click="ass_build_selecionarVtr(this,'5592')">PM-5592</button>
+              <button type="button" class="vtr-btn" data-click="ass_build_selecionarVtr(this,'5599')">PM-5599</button>
+              <button type="button" class="vtr-btn vtr-manual-btn" id="ass_build_vtr_manual_btn" data-click="ass_build_toggleVtrManual(this)">✏️ Manual</button>
+            </div>
+            <div id="ass_build_vtr_manual_wrap" class="hidden mt-8">
+              <div style="display:flex;gap:6px;align-items:center;">
+                <div class="prefix-input" style="flex:1;">
+                  <span>PM-</span>
+                  <input type="text" id="ass_build_vtr_input" placeholder="0000" maxlength="4" inputmode="numeric">
+                </div>
+              </div>
+            </div>
+            <div id="ass_build_vtr_label" style="display:none;margin-top:8px;padding:6px 12px;border-radius:8px;background:rgba(59,130,246,.12);color:#3b82f6;font-size:13px;font-weight:700;"></div>
+            <div id="ass_build_tipo_section" style="display:none;margin-top:10px;">
+              <div style="font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--label);margin-bottom:6px;">Escala</div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">
+                <button type="button" class="vtr-btn ass-tipo-btn" data-click="ass_build_selecionarTipo(this,'Ordinária')">Ordinária</button>
+                <button type="button" class="vtr-btn ass-tipo-btn" data-click="ass_build_selecionarTipo(this,'Apoio')">Apoio</button>
+                <button type="button" class="vtr-btn ass-tipo-btn" data-click="ass_build_selecionarTipo(this,'Ponte')">Ponte</button>
+                <button type="button" class="vtr-btn ass-tipo-btn" data-click="ass_build_selecionarTipo(this,'Evento')">Evento</button>
+                <button type="button" class="vtr-btn ass-tipo-btn" data-click="ass_build_selecionarTipo(this,'Futebol')">Futebol</button>
+                <button type="button" class="vtr-btn ass-tipo-btn" data-click="ass_build_selecionarTipo(this,'__manual__')">✏️ Manual</button>
+              </div>
+              <div id="ass_build_tipo_manual_wrap" class="hidden" style="margin-top:6px;">
+                <input type="text" id="ass_build_tipo_input" placeholder="Tipo de escala..." style="width:100%;" data-input="ass_build_atualizarLabel()">
+              </div>
+            </div>
+            <div style="height:1px;background:var(--border);margin:14px 0;"></div>
+          </div>
+          <label class="field-label" id="ass_build_pol_label">Policiais desta Viatura</label>
+          <div id="ass_build_grupos_grid" style="display:grid;grid-template-columns:1fr;gap:6px;margin-bottom:10px;">
+            <button type="button" class="vtr-btn" data-click="ass_build_carregarGrupo(this,'efetivo')">Efetivo</button>
+          </div>
+          <div id="ass_build_nomes_grid" style="display:none;flex-wrap:wrap;gap:6px;margin-bottom:8px;"></div>
+          <div id="ass_build_manual_pol_wrap" class="hidden">
+            <div style="display:flex;gap:6px;align-items:center;margin-top:4px;">
+              <select id="ass_build_grad_manual" style="flex:0 0 130px;">
+                <option value="Sd PM">Soldado</option>
+                <option value="Cb PM">Cabo</option>
+                <option value="3º Sgt PM">3º Sgt</option>
+                <option value="2º Sgt PM">2º Sgt</option>
+                <option value="1º Sgt PM">1º Sgt</option>
+                <option value="Sub-Ten PM">Sub-Ten</option>
+              </select>
+              <input type="text" id="ass_build_nome_manual" placeholder="Nome do policial" style="flex:1;" data-keydown-enter="ass_build_adicionarManual()">
+              <button type="button" class="btn btn-sm btn-success" data-click="ass_build_adicionarManual()">+ OK</button>
+            </div>
+          </div>
+          <button type="button" class="btn btn-sm" style="margin-top:6px;width:100%;" data-click="ass_build_toggleManualPol()">✏️ Adicionar Manualmente</button>
+          <div id="ass_build_pol_chips_wrap" style="display:none;margin-top:8px;">
+            <div style="font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--label);margin-bottom:4px;">Selecionados:</div>
+            <div id="ass_build_pol_chips" style="display:flex;flex-wrap:wrap;gap:5px;"></div>
+          </div>
+          <div style="height:1px;background:var(--border);margin:14px 0;"></div>
+          <label class="field-label" id="ass_build_hor_label">Horário desta Viatura</label>
+          <select id="ass_build_horario" style="width:100%;">
+            <option value="06h às 18h">06h às 18h (Diurno)</option>
+            <option value="07h às 19h">07h às 19h (Diurno)</option>
+            <option value="19h às 07h">19h às 07h (Noturno)</option>
+            <option value="13h às 01h">13h às 01h</option>
+            <option value="07h às 07h">07h às 07h (24h)</option>
+          </select>
+          <button type="button" class="btn btn-primary btn-full" id="ass_build_confirmar_btn" style="margin-top:14px;" data-click="ass_adicionarLote()">+ Confirmar Viatura</button>
+        </div>
+
+        <!-- Serviço montado (lista de lotes) -->
+        <div class="form-field" id="ass_lotes_wrap" style="display:none;">
+          <label class="field-label">Serviço Montado</label>
+          <div id="ass_lotes_lista"></div>
+        </div>
+
+        <!-- Turno -->
+        <div class="form-row form-row-2">
+          <div class="form-field">
+            <label class="field-label">Turno / Horário</label>
+            <select id="ass_horario" data-change="ass_toggleManual()">
+              <option value="06h às 18h">06h às 18h (Diurno)</option>
+              <option value="07h às 19h">07h às 19h (Diurno)</option>
+              <option value="19h às 07h">19h às 07h (Noturno)</option>
+              <option value="13h às 01h">13h às 01h</option>
+              <option value="07h às 07h">07h às 07h (24h)</option>
+              <option value="MANUAL">Inserir manualmente...</option>
+            </select>
+            <input type="text" id="ass_horarioManual" class="hidden mt-8" placeholder="Ex: 08h às 14h">
+          </div>
+          <div class="form-field">
+            <label class="field-label">Localização</label>
+            <select id="ass_local">
+              <option>P19</option>
+              <option>Ponte</option>
+              <option>SC-400</option>
+              <option>SC-402</option>
+              <option>SC-403</option>
+              <option>Viatura de apoio no P19</option>
+              <option>Setor 3 – Área Central / Pontes</option>
+              <option>Apoio / Futebol</option>
+              <option>Pontes / Futebol</option>
+            </select>
+            <input type="text" id="ass_localManual" class="mt-8" placeholder="Local manual (deixe vazio para usar acima)">
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-full btn-lg" data-click="ass_gerar()">⚡ Gerar Texto</button>
+      </div>
+
+      <div class="result-box" id="ass_result">
+        <p class="result-label">Texto gerado</p>
+        <div class="result-text" id="ass_resultado"></div>
+        <div class="result-actions">
+          <button class="btn btn-success" data-click="copiar('ass_resultado', this)">📋 Copiar</button>
+          <button class="btn btn-whats"   data-click="whatsapp('ass_resultado')">📲 WhatsApp</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ENVOLVIDOS
+  ============================================================ -->
+  <section id="screen-envolvidos" class="screen">
+    <div class="back-row">
+      <button class="btn" data-click="go('home')">← Voltar</button>
+      <button class="btn btn-danger" data-click="go('ended')">Sair</button>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h2 class="card-title">📋 Registro de Sinistro</h2>
+          <p class="card-sub">Adicione todos os envolvidos e testemunhas</p>
+        </div>
+      </div>
+
+      <div id="env_lista" class="form-grid">
+        <!-- Cards dinâmicos de envolvidos -->
+      </div>
+
+      <button class="btn btn-full mt-12" data-click="env_adicionar()" id="env_btn_add">+ Adicionar Envolvido</button>
+
+      <div class="divider mt-12" style="margin-bottom:12px;"></div>
+
+      <div class="flex gap-8 flex-wrap">
+        <button class="btn btn-success" style="flex:1" data-click="env_copiar()">📄 Copiar</button>
+        <button class="btn btn-whats"   style="flex:1" data-click="env_whatsapp()">🟢 WhatsApp</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PMRv
+  ============================================================ -->
+  <section id="screen-pmrv" class="screen">
+    <div class="back-row">
+      <button class="btn" data-click="go('home')">← Voltar</button>
+      <button class="btn btn-danger" data-click="go('ended')">Sair</button>
+    </div>
+    <div class="card">
+      <div class="report-header">
+        <h1>POLÍCIA MILITAR RODOVIÁRIA</h1>
+        <small>1º BPMRv / 1ª CIA / Posto 19</small>
+      </div>
+
+      <div class="form-grid">
+        <!-- Linha 1: SADE + VTR + Rodovia -->
+        <div class="form-row form-row-3">
+          <div class="form-field" style="grid-column: span 1;">
+            <label class="field-label">Protocolo SADE</label>
+            <input type="text" id="pmrv_sade" placeholder="Nº SADE" data-input="pmrv_atualizar()">
+          </div>
+          <div class="form-field">
+            <label class="field-label">VTR</label>
+            <div class="prefix-input">
+              <span>PM-</span>
+              <input type="text" id="pmrv_vtr" placeholder="0000" maxlength="4" inputmode="numeric" data-input="pmrv_validarVtr(this)">
+            </div>
+          </div>
+          <div class="form-field">
+            <label class="field-label">Rodovia</label>
+            <select id="pmrv_rodovia" data-change="pmrv_verificarRodovia()">
+              <option value="SC-400">SC-400</option>
+              <option value="SC-401">SC-401</option>
+              <option value="SC-402">SC-402</option>
+              <option value="SC-403">SC-403</option>
+              <option value="SC-405">SC-405</option>
+              <option value="SC-406">SC-406</option>
+              <option value="SC-281">SC-281</option>
+              <option value="SC-407">SC-407</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Linha 2: Cidade + KM -->
+        <div class="form-row form-row-2">
+          <div class="form-field">
+            <label class="field-label">Cidade</label>
+            <input type="text" id="pmrv_cidade" value="Florianópolis/SC" data-input="pmrv_atualizar()">
+            <select id="pmrv_cidade_407" class="hidden mt-8" data-change="pmrv_selecionarCidade407()">
+              <option value="Biguaçu/SC">Biguaçu/SC</option>
+              <option value="Antônio Carlos/SC">Antônio Carlos/SC</option>
+            </select>
+            <select id="pmrv_cidade_281" class="hidden mt-8" data-change="pmrv_selecionarCidade281()">
+              <option value="São José/SC">São José/SC</option>
+              <option value="Colônia Santana/SC">Colônia Santana/SC</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="field-label">KM</label>
+            <input type="text" id="pmrv_km" placeholder="0.000" maxlength="6" data-input="pmrv_atualizar()">
+          </div>
+        </div>
+
+        <!-- Horário -->
+        <div class="form-field">
+          <label class="field-label">Horário do Sinistro</label>
+          <div class="sub-box">
+            <div class="radio-row">
+              <label><input type="radio" name="pmrv_tipo_hora" id="pmrv_hora_auto" checked data-click="pmrv_atualizar()"> Automático</label>
+              <label><input type="radio" name="pmrv_tipo_hora" id="pmrv_hora_manual" data-click="pmrv_atualizar()"> Manual</label>
+              <input type="time" id="pmrv_input_hora" data-input="pmrv_atualizar()" style="width:110px; padding:6px;">
+            </div>
+          </div>
+        </div>
+
+        <!-- Ocorrência -->
+        <div class="form-row form-row-2">
+          <div class="form-field">
+            <label class="field-label">Tipo de Ocorrência</label>
+            <select id="pmrv_ocorrencia" data-change="pmrv_verificarVitimas()">
+              <option value="Sinistro de trânsito com danos materiais">Danos materiais</option>
+              <option value="Sinistro de trânsito com vítima(s)">Com vítima(s)</option>
+              <option value="Sinistro de trânsito com óbito">Com óbito</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="field-label">Acionamento</label>
+            <select id="pmrv_conhecimento" data-change="pmrv_atualizar()">
+              <option value="pela Central">Pela Central</option>
+              <option value="após deparar-se">Deparou-se</option>
+              <option value="por usuário da via">Usuário da via</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Vítimas (condicional) -->
+        <div id="pmrv_box_vitimas" class="form-field hidden">
+          <label class="field-label">Quantidade de Vítimas</label>
+          <div class="sub-box sub-box-red">
+            <div class="vitimas-grid">
+              <div class="form-field">
+                <label class="field-label">Leve</label>
+                <input type="number" id="pmrv_qtd_leve" value="0" min="0" data-input="pmrv_atualizar()">
+              </div>
+              <div class="form-field">
+                <label class="field-label">Grave</label>
+                <input type="number" id="pmrv_qtd_grave" value="0" min="0" data-input="pmrv_atualizar()">
+              </div>
+              <div class="form-field">
+                <label class="field-label">Gravíssima</label>
+                <input type="number" id="pmrv_qtd_gravissima" value="0" min="0" data-input="pmrv_atualizar()">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sentido -->
+        <div class="form-row form-row-2">
+          <div class="form-field">
+            <label class="field-label">Sentido</label>
+            <select id="pmrv_sentido" data-change="pmrv_toggleSentidoManual()">
+              <option value="Centro–Bairro">Centro–Bairro</option>
+              <option value="Bairro–Centro">Bairro–Centro</option>
+              <option value="KM Crescente">KM Crescente</option>
+              <option value="KM Decrescente">KM Decrescente</option>
+              <option value="MANUAL">Outro...</option>
+            </select>
+            <input type="text" id="pmrv_sentido_manual" class="hidden mt-8" placeholder="Descreva o sentido..." data-input="pmrv_atualizar()">
+          </div>
+          <div class="form-field">
+            <label class="field-label">Tipo de Sinistro</label>
+            <select id="pmrv_subtipo" data-change="pmrv_mudarSubtipo()">
+              <optgroup label="1. Atropelamento">
+                <option value="1.1">1.1 – Atropelamento de Pedestre</option>
+                <option value="1.2">1.2 – Atropelamento de Animal</option>
+              </optgroup>
+              <optgroup label="2. Abalroamento">
+                <option value="2.1">2.1 – Abalroamento Longitudinal (Mesmo Sentido)</option>
+                <option value="2.2">2.2 – Abalroamento Longitudinal (Sentido Oposto)</option>
+                <option value="2.3">2.3 – Abalroamento Transversal</option>
+              </optgroup>
+              <optgroup label="3. Colisão">
+                <option value="3.1">3.1 – Colisão Frontal</option>
+                <option value="3.2">3.2 – Colisão Traseira</option>
+                <option value="3.3">3.3 – Colisão Engavetamento</option>
+              </optgroup>
+              <optgroup label="4. Choque">
+                <option value="4.1">4.1 – Choque em Poste</option>
+                <option value="4.6">4.6 – Choque em Defensa</option>
+                <option value="4.9">4.9 – Choque em Objeto (especificar)</option>
+              </optgroup>
+              <optgroup label="5. Saída de Pista">
+                <option value="5.1">5.1 – Saída de Pista Simples</option>
+                <option value="5.3">5.3 – Saída de Pista com Capotamento</option>
+                <option value="5.4">5.4 – Saída de Pista com Tombamento</option>
+              </optgroup>
+              <optgroup label="6. Saída + Choque">
+                <option value="6.1">6.1 – Saída + Choque em Poste</option>
+                <option value="6.2">6.2 – Saída + Choque em Muro</option>
+                <option value="6.3">6.3 – Saída + Choque em Defensa</option>
+                <option value="6.4">6.4 – Saída + Choque em Objeto (especificar)</option>
+              </optgroup>
+              <optgroup label="7. Outros">
+                <option value="7.1">7.1 – Outros (especificar)</option>
+              </optgroup>
+            </select>
+          </div>
+        </div>
+
+        <!-- Objeto / Outros condicional -->
+        <div id="pmrv_box_objeto" class="form-field hidden">
+          <label class="field-label">Qual o objeto?</label>
+          <input type="text" id="pmrv_nome_objeto" placeholder="Ex: árvore, barranco..." data-input="pmrv_mudarSubtipo()">
+        </div>
+        <div id="pmrv_box_outros" class="form-field hidden">
+          <label class="field-label">Descreva a natureza do sinistro</label>
+          <input type="text" id="pmrv_descricao_outros" placeholder="Ex: incêndio em veículo, queda de carga..." data-input="pmrv_mudarSubtipo()">
+        </div>
+
+        <!-- Dinâmica -->
+        <div class="form-field">
+          <label class="field-label">Dinâmica do Fato (editável)</label>
+          <textarea id="pmrv_dinamica_texto" data-input="pmrv_atualizar()"></textarea>
+        </div>
+      </div>
+
+      <!-- Resultado em tempo real -->
+      <div class="result-box visible" style="margin-top:20px;">
+        <p class="result-label">Prévia do relatório</p>
+        <div class="result-text" id="pmrv_relatorio"></div>
+        <div class="result-actions">
+          <button class="btn"            data-click="pmrv_limpar()">🗑 Limpar</button>
+          <button class="btn btn-success" data-click="copiar('pmrv_relatorio', this)">📋 Copiar</button>
+          <button class="btn btn-whats"   data-click="pmrv_enviarWhatsApp()">📱 WhatsApp</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       DANOS APARENTES — INTERATIVO
+  ============================================================ -->
+  <section id="screen-danos" class="screen">
+    <div class="back-row">
+      <button class="btn" data-click="go('home')">← Voltar</button>
+      <button class="btn btn-danger" data-click="go('ended')">Sair</button>
+    </div>
+
+    <!-- STEP 1: escolher veículo -->
+    <div class="card" id="dan-step-vehicle">
+      <h2 class="card-title">Selecione o tipo de veículo</h2>
+      <p class="card-sub" style="margin-bottom:14px;">Toque no veículo envolvido no sinistro</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <button class="dan-veh-btn" id="dan-btn-carro" data-click="danEscolherVeiculo('carro')">
+          <img src="img/extracted_6.png" alt="Carro" style="height:80px;width:auto;object-fit:contain;margin-bottom:6px;display:block;">
+          <span style="font-family:var(--font-display);font-size:18px;font-weight:900;">Carro</span>
+        </button>
+        <button class="dan-veh-btn" id="dan-btn-moto" data-click="danEscolherVeiculo('moto')">
+          <img src="img/extracted_7.png" alt="Motocicleta" style="height:80px;width:auto;object-fit:contain;margin-bottom:6px;display:block;">
+          <span style="font-family:var(--font-display);font-size:18px;font-weight:900;">Motocicleta</span>
+        </button>
+      </div>
+      <div id="dan-salvos-area" style="display:none;margin-top:16px;">
+        <div style="height:1px;background:var(--border);margin-bottom:14px;"></div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--label);margin-bottom:10px;">Veículos adicionados</div>
+        <div id="dan-salvos-lista"></div>
+        <div style="height:1px;background:var(--border);margin:14px 0;"></div>
+        <button class="btn btn-primary btn-full btn-lg" data-click="danGerarTextoTodos()">⚡ Gerar Relatório de Todos</button>
+        <div id="dan-todos-result-area" style="display:none;margin-top:14px;">
+          <div class="result-text" id="dan-todos-result-text"></div>
+          <div class="result-actions">
+            <button class="btn btn-success" data-click="danTodosCopiar(this)">📋 Copiar</button>
+            <button class="btn btn-whats" data-click="danTodosWhatsApp()">📲 WhatsApp</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: diagrama interativo -->
+    <div id="dan-step-diagram" style="display:none;">
+      <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
+        <button class="btn" data-click="danVoltarStep1()">← Trocar veículo</button>
+        <button class="btn btn-danger" data-click="danLimparTudo()">🗑 Limpar tudo</button>
+      </div>
+
+      <div class="card">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px;">
+          <div>
+            <h2 class="card-title" id="dan-diag-title">Danos Aparentes — Carro</h2>
+            <p class="card-sub">Toque nos pontos numerados para registrar o dano</p>
+          </div>
+          <span id="dan-veh-badge" style="font-size:28px;"></span>
+        </div>
+
+        <!-- Tabs de vista -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:14px;">
+          <button class="dan-tab active" id="dan-tab-frontal"  data-click="danMudarVista('frontal')">
+            <img class="dan-tab-thumb" src="carro_frente_nobg.png" alt="Frente">
+            Frontal
+          </button>
+          <button class="dan-tab" id="dan-tab-traseira" data-click="danMudarVista('traseira')">
+            <img class="dan-tab-thumb" src="carro_tras_nobg.png" alt="Traseira">
+            Traseira
+          </button>
+          <button class="dan-tab" id="dan-tab-esquerda" data-click="danMudarVista('esquerda')">
+            <img class="dan-tab-thumb" src="carro_esquerda_nobg.png" alt="Esquerda">
+            Lateral esquerda
+          </button>
+          <button class="dan-tab" id="dan-tab-direita"  data-click="danMudarVista('direita')">
+            <img class="dan-tab-thumb" src="carro_direita_nobg.png" alt="Direita">
+            Lateral direita
+          </button>
+        </div>
+
+        <!-- SVG area -->
+        <div id="dan-diagram-area" style="background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;min-height:220px;"></div>
+        <div id="dan-part-readout" style="margin-top:8px;padding:10px 12px;border:1px dashed var(--border);border-radius:12px;background:rgba(245,130,32,.06);font-size:13px;color:var(--text);font-weight:700;min-height:42px;display:flex;align-items:center;">Passe ou toque em um círculo para ver o nome da peça.</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;flex-wrap:wrap;gap:6px;">
+          <p style="font-size:11px;color:var(--label);margin:0;" id="dan-hint-txt">Toque num círculo → escolha o tipo de dano</p>
+        </div>
+      </div>
+
+      <!-- Summary + resultado -->
+      <div class="card" style="margin-top:12px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--label);margin-bottom:10px;">Danos registrados</div>
+        <div id="dan-summary-tags">
+          <div style="font-size:13px;color:var(--label);text-align:center;padding:18px;border:1px dashed var(--border);border-radius:10px;">Nenhum dano registrado ainda.<br>Toque nos pontos do diagrama.</div>
+        </div>
+        <div style="height:1px;background:var(--border);margin:14px 0;"></div>
+        <button class="btn btn-success btn-full" style="margin-bottom:8px;" data-click="danSalvarVeiculo()">💾 Salvar este veículo</button>
+        <button class="btn btn-primary btn-full btn-lg" data-click="danGerarTexto()">⚡ Gerar Relatório</button>
+        <div id="dan-result-area" style="display:none;margin-top:14px;">
+          <div class="result-text" id="dan-result-text"></div>
+          <div class="result-actions">
+            <button class="btn btn-success" data-click="danCopiar(this)">📋 Copiar</button>
+            <button class="btn btn-whats"   data-click="danWhatsApp()">📲 WhatsApp</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fotos dos danos — Carro -->
+      <div class="card" style="margin-top:12px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--label);margin-bottom:10px;">📷 Fotos dos Danos</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px;">
+          <label class="foto-label" style="flex-direction:column;padding:12px 6px;font-size:12px;">
+            <span style="font-size:20px;margin-bottom:3px;">📷</span>Tirar Foto
+            <input type="file" accept="image/*" capture="environment" multiple style="display:none;" data-change="danFotoMiniatura(this,'dan-foto-grid-carro','dan-foto-actions-carro')">
+          </label>
+          <label class="foto-label" style="flex-direction:column;padding:12px 6px;font-size:12px;">
+            <span style="font-size:20px;margin-bottom:3px;">🖼️</span>Anexar Imagem
+            <input type="file" accept="image/*" multiple style="display:none;" data-change="danFotoMiniatura(this,'dan-foto-grid-carro','dan-foto-actions-carro')">
+          </label>
+        </div>
+        <div class="foto-grid" id="dan-foto-grid-carro"></div>
+        <div id="dan-foto-actions-carro" style="display:none;gap:6px;flex-wrap:wrap;margin-top:8px;">
+          <button type="button" class="btn btn-sm btn-whats" data-click="danFotoCompartilhar('dan-foto-grid-carro')">📲 Compartilhar Fotos</button>
+          <button type="button" class="btn btn-sm btn-danger" data-click="danFotoLimpar('dan-foto-grid-carro','dan-foto-actions-carro')">🗑 Remover Todas</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="dan-step-moto360" style="display:none;">
+      <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
+        <button class="btn" data-click="danVoltarStep1()">← Trocar veículo</button>
+        <button class="btn btn-danger" data-click="v360limpar()">🗑 Limpar tudo</button>
+      </div>
+
+      <div class="card">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px;">
+          <div>
+            <h2 class="card-title">🏍️ Danos Aparentes — Motocicleta</h2>
+            <p class="card-sub" id="v360-hint-txt">Toque nos círculos para registrar os danos.</p>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:14px;">
+          <button class="dan-tab active" id="v360-tab-frente"   data-click="v360switchTab(this,'frente')">
+            <img class="dan-tab-thumb" src="" id="dan-thumb-frente" alt="Frente">
+            Frente
+          </button>
+          <button class="dan-tab" id="v360-tab-tras" data-click="v360switchTab(this,'tras')">
+            <img class="dan-tab-thumb" src="" id="dan-thumb-tras" alt="Traseira">
+            Traseira
+          </button>
+          <button class="dan-tab" id="v360-tab-direita" data-click="v360switchTab(this,'direita')">
+            <img class="dan-tab-thumb" src="" id="dan-thumb-direita" alt="Direita">
+            Lateral direita
+          </button>
+          <button class="dan-tab" id="v360-tab-esquerda" data-click="v360switchTab(this,'esquerda')">
+            <img class="dan-tab-thumb" src="" id="dan-thumb-esquerda" alt="Esquerda">
+            Lateral esquerda
+          </button>
+        </div>
+
+        <div class="v360-wrap">
+          <div class="v360-canvas" id="v360-canvas">
+            <div class="v360-hint" id="v360-hint">👆 Toque na foto para posicionar o marcador</div>
+            <img src="img/extracted_8.png" id="v360-img-frente" class="moto-img active" alt="Moto frente">
+            <img src="img/extracted_9.png" id="v360-img-tras" class="moto-img" alt="Moto traseira">
+            <img src="img/extracted_10.png" id="v360-img-direita" class="moto-img" alt="Moto direita">
+            <img src="img/extracted_11.png" id="v360-img-esquerda" class="moto-img" alt="Moto esquerda">
+          </div>
+          <div class="v360-legend">
+              <div class="v360-legend-header">🏍️ Peças — soltar em: <span id="v360-leg-vista">FRENTE</span></div>
+              <div style="padding:4px 12px 5px;font-size:11px;color:var(--muted);border-bottom:1px solid var(--border);background:rgba(245,158,11,.06);">Clique no ◯ na foto para classificar o dano</div>
+              <div class="v360-legend-scroll" id="v360-legend-list"></div>
+          </div>
+        </div>
+        <div id="v360-part-readout" style="margin-top:8px;padding:10px 12px;border:1px dashed var(--border);border-radius:12px;background:rgba(245,130,32,.06);font-size:13px;color:var(--text);font-weight:700;min-height:42px;display:flex;align-items:center;">Toque em um círculo para ver o nome da peça selecionada.</div>
+      </div>
+
+      <div class="card" style="margin-top:12px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--label);margin-bottom:10px;">Danos registrados</div>
+        <div id="v360-summary-tags">
+          <div style="font-size:13px;color:var(--label);text-align:center;padding:18px;border:1px dashed var(--border);border-radius:10px;">Nenhum dano registrado ainda.<br>Toque nos pontos da foto.</div>
+        </div>
+        <div style="height:1px;background:var(--border);margin:14px 0;"></div>
+        <button class="btn btn-success btn-full" style="margin-bottom:8px;" data-click="danSalvarVeiculo()">💾 Salvar este veículo</button>
+        <button class="btn btn-primary btn-full btn-lg" data-click="danGerarTexto()">⚡ Gerar Relatório</button>
+        <div id="v360-result-area" style="display:none;margin-top:14px;">
+          <div class="result-text" id="v360-result-text"></div>
+          <div class="result-actions">
+            <button class="btn btn-success" data-click="v360Copiar(this)">📋 Copiar</button>
+            <button class="btn btn-whats" data-click="v360WhatsApp()">📲 WhatsApp</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fotos dos danos — Moto -->
+      <div class="card" style="margin-top:12px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--label);margin-bottom:10px;">📷 Fotos dos Danos</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px;">
+          <label class="foto-label" style="flex-direction:column;padding:12px 6px;font-size:12px;">
+            <span style="font-size:20px;margin-bottom:3px;">📷</span>Tirar Foto
+            <input type="file" accept="image/*" capture="environment" multiple style="display:none;" data-change="danFotoMiniatura(this,'dan-foto-grid-moto','dan-foto-actions-moto')">
+          </label>
+          <label class="foto-label" style="flex-direction:column;padding:12px 6px;font-size:12px;">
+            <span style="font-size:20px;margin-bottom:3px;">🖼️</span>Anexar Imagem
+            <input type="file" accept="image/*" multiple style="display:none;" data-change="danFotoMiniatura(this,'dan-foto-grid-moto','dan-foto-actions-moto')">
+          </label>
+        </div>
+        <div class="foto-grid" id="dan-foto-grid-moto"></div>
+        <div id="dan-foto-actions-moto" style="display:none;gap:6px;flex-wrap:wrap;margin-top:8px;">
+          <button type="button" class="btn btn-sm btn-whats" data-click="danFotoCompartilhar('dan-foto-grid-moto')">📲 Compartilhar Fotos</button>
+          <button type="button" class="btn btn-sm btn-danger" data-click="danFotoLimpar('dan-foto-grid-moto','dan-foto-actions-moto')">🗑 Remover Todas</button>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============================================================
+       RELATÓRIO COMPLETO
+  ============================================================ -->
+  <section id="screen-relatorio" class="screen">
+    <div class="back-row">
+      <button class="btn" data-click="go('home')">← Voltar</button>
+      <button class="btn btn-danger" data-click="go('ended')">Sair</button>
+    </div>
+
+    <div class="card" style="border-left:4px solid #8b5cf6;margin-bottom:4px;">
+      <div style="font-size:30px;margin-bottom:6px;">📋</div>
+      <div class="screen-title" style="margin:0 0 4px;">Relatório Completo</div>
+      <div style="color:var(--muted);font-size:13px;">Consolida envolvidos + danos aparentes em um único relatório</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+      <div class="card" style="text-align:center;padding:16px 10px;">
+        <div id="rel-count-env" style="font-size:32px;font-weight:900;color:#22c55e;">—</div>
+        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;">Envolvidos</div>
+      </div>
+      <div class="card" style="text-align:center;padding:16px 10px;">
+        <div id="rel-count-dan" style="font-size:32px;font-weight:900;color:#f59e0b;">—</div>
+        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;">Veíc. c/ Danos</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:10px;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--label);margin-bottom:10px;">📍 Fotos do Local</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px;">
+        <label class="foto-label" style="flex-direction:column;padding:12px 6px;font-size:12px;">
+          <span style="font-size:20px;margin-bottom:3px;">📷</span>Tirar Foto
+          <input type="file" accept="image/*" capture="environment" multiple style="display:none;" data-change="relFull_fotoMiniatura(this)">
+        </label>
+        <label class="foto-label" style="flex-direction:column;padding:12px 6px;font-size:12px;">
+          <span style="font-size:20px;margin-bottom:3px;">🖼️</span>Anexar Imagem
+          <input type="file" accept="image/*" multiple style="display:none;" data-change="relFull_fotoMiniatura(this)">
+        </label>
+      </div>
+      <div class="foto-grid" id="rel-local-grid"></div>
+      <div id="rel-local-actions" style="display:none;gap:6px;flex-wrap:wrap;margin-top:8px;">
+        <button type="button" class="btn btn-sm btn-danger" data-click="relFull_limparFotosLocal()">🗑 Remover Fotos do Local</button>
+      </div>
+      <div style="font-size:11px;color:var(--muted);margin-top:8px;">Limite: até 2 fotos do local do sinistro.</div>
+    </div>
+
+    <button class="btn btn-primary btn-lg btn-full" data-click="relFull_gerar()" style="background:linear-gradient(135deg,#7c3aed,#8b5cf6);">🔄 Gerar Relatório Completo</button>
+
+    <div id="rel-result-area" style="display:none;margin-top:14px;">
+      <div class="card">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--label);margin-bottom:8px;">📄 Texto do Relatório</div>
+        <pre id="rel-result-text" style="white-space:pre-wrap;font-size:12px;line-height:1.6;color:var(--text);font-family:inherit;max-height:360px;overflow-y:auto;"></pre>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;">
+        <button class="btn btn-success btn-lg" data-click="relFull_copiar(this)">📋 Copiar</button>
+        <button class="btn btn-whats btn-lg" data-click="relFull_whatsapp()">📲 WhatsApp</button>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;">
+        <button class="btn btn-lg" data-click="relFull_baixar()">💾 Baixar texto (.txt)</button>
+        <button class="btn btn-lg btn-whats" data-click="relFull_compartilharFotos()">📷 Compartilhar só as fotos</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONSULTA DE INFRAÇÕES
+  ============================================================ -->
+  <section id="screen-infracoes" class="screen screen-app">
+    <div class="back-row">
+      <button class="btn" data-click="go('home')">← Voltar</button>
+      <button class="btn btn-danger" data-click="go('ended')">Sair</button>
+    </div>
+
+    <div class="card infra-page">
+      <div class="infra-hero">
+        <div class="infra-hero-copy">
+          <h2 class="card-title infra-title">Consulta de Infrações</h2>
+          <p class="card-sub infra-sub">Pesquisa direta na base local com filtros por texto, categoria e medida administrativa, sem abrir outra página.</p>
+        </div>
+      </div>
+
+      <div class="infra-filter-grid">
+        <div class="form-field">
+          <label class="field-label" for="infra_search">Busca geral</label>
+          <input id="infra_search" type="search" placeholder="Código, descrição, artigo, categoria, infrator ou medida">
+        </div>
+        <div class="form-field">
+          <label class="field-label" for="infra_category">Categoria</label>
+          <select id="infra_category">
+            <option value="">Todas</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label class="field-label" for="infra_measure">Medida administrativa</label>
+          <select id="infra_measure">
+            <option value="">Todas</option>
+          </select>
+        </div>
+        <div class="form-field infra-filter-action">
+          <label class="field-label">Ações</label>
+          <button id="infra_clear" class="btn btn-primary btn-full" type="button">Limpar filtros</button>
+        </div>
+      </div>
+
+      <div class="infra-tabs" role="tablist" aria-label="Seções da consulta de infrações">
+        <button id="infra_tab_consulta" class="infra-tab-btn active" type="button" data-click="infra_showTab('consulta')">Consulta</button>
+        <button id="infra_tab_frequentes" class="infra-tab-btn" type="button" data-click="infra_showTab('frequentes')">Infrações Frequente</button>
+      </div>
+
+      <div id="infra_panel_consulta" class="infra-tab-panel active">
+        <div class="infra-stats">
+          <article class="infra-stat">
+            <span class="infra-stat-label">Total de infrações</span>
+            <strong id="infra_totalCount">0</strong>
+          </article>
+          <article class="infra-stat">
+            <span class="infra-stat-label">Resultados exibidos</span>
+            <strong id="infra_filteredCount">0</strong>
+          </article>
+          <article class="infra-stat">
+            <span class="infra-stat-label">Categorias</span>
+            <strong id="infra_categoryCount">0</strong>
+          </article>
+        </div>
+
+        <div class="infra-panel">
+          <div class="infra-panel-head">
+            <div>
+              <div id="infra_status" class="infra-status">Carregando base...</div>
+              <p id="infra_summary" class="infra-summary">Aguarde enquanto os registros são preparados.</p>
+            </div>
+          </div>
+
+          <div class="infra-table-wrap">
+            <table class="infra-table">
+              <thead>
+                <tr>
+                  <th>Código</th>
+                  <th>Descrição</th>
+                  <th>Artigo / Decreto</th>
+                  <th>Infrator</th>
+                  <th>Categoria</th>
+                  <th>Medida administrativa</th>
+                  <th>Valor</th>
+                </tr>
+              </thead>
+              <tbody id="infra_tableBody"></tbody>
+            </table>
+            <div id="infra_emptyState" class="infra-empty" hidden>Nenhum resultado encontrado para os filtros atuais.</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="infra_panel_frequentes" class="infra-tab-panel" hidden>
+        <div class="infra-frequent-grid">
+          <button class="infra-frequent-card" type="button" data-click="infra_applyShortcut('5010-0')">
+            <span class="infra-frequent-code">Código: 5010-0</span>
+            <strong>Dirigir sem CNH/PPD/ACC</strong>
+            <span class="infra-frequent-art">Art. 162</span>
+          </button>
+          <button class="infra-frequent-card" type="button" data-click="infra_applyShortcut('6637-2')">
+            <span class="infra-frequent-code">Código: 6637-2</span>
+            <strong>Equipamento em desacordo com o Contran</strong>
+            <span class="infra-frequent-art">Art. 230</span>
+          </button>
+          <button class="infra-frequent-card" type="button" data-click="infra_applyShortcut('6610-2')">
+            <span class="infra-frequent-code">Código: 6610-2</span>
+            <strong>Iluminação/sinalização alterada</strong>
+            <span class="infra-frequent-art">Art. 230</span>
+          </button>
+          <button class="infra-frequent-card" type="button" data-click="infra_applyShortcut('5185-1')">
+            <span class="infra-frequent-code">Código: 5185-1</span>
+            <strong>Desobedecer ordem de agente</strong>
+            <span class="infra-frequent-art">Art. 195</span>
+          </button>
+          <button class="infra-frequent-card" type="button" data-click="infra_applyShortcut('5185-0')">
+            <span class="infra-frequent-code">Código: 5185-0</span>
+            <strong>Não usar cinto de segurança</strong>
+            <span class="infra-frequent-art">Art. 167</span>
+          </button>
+          <button class="infra-frequent-card" type="button" data-click="infra_applyShortcut('6599-2')">
+            <span class="infra-frequent-code">Código: 6599-2</span>
+            <strong>Veículo em mau estado de conservação</strong>
+            <span class="infra-frequent-art">Art. 230</span>
+          </button>
+          <button class="infra-frequent-card" type="button" data-click="infra_applyShortcut('6599-0')">
+            <span class="infra-frequent-code">Código: 6599-0</span>
+            <strong>Veículo não licenciado</strong>
+            <span class="infra-frequent-art">Art. 230</span>
+          </button>
+          <button class="infra-frequent-card" type="button" data-click="infra_applyShortcut('5738-0')">
+            <span class="infra-frequent-code">Código: 5738-0</span>
+            <strong>Ultrapassar em faixa contínua amarela (contramão)</strong>
+            <span class="infra-frequent-art">Art. 203</span>
+          </button>
+          <button class="infra-frequent-card infra-frequent-card--highlight" type="button" data-click="infra_applyShortcut('7579-0')">
+            <span class="infra-frequent-code">Código: 7579-0</span>
+            <strong>Recusar teste do etilômetro</strong>
+            <span class="infra-frequent-art">Art. 165-A</span>
+          </button>
+          <button class="infra-frequent-card infra-frequent-card--highlight" type="button" data-click="infra_applyShortcut('5010-0')">
+            <span class="infra-frequent-code">Código: 5010-0</span>
+            <strong>Dirigir sem CNH</strong>
+            <span class="infra-frequent-art">Art. 162</span>
+          </button>
+          <button class="infra-frequent-card infra-frequent-card--highlight" type="button" data-click="infra_applyShortcut('7366-2')">
+            <span class="infra-frequent-code">Código: 7366-2</span>
+            <strong>Usar celular ao dirigir</strong>
+            <span class="infra-frequent-art">Art. 252, VI</span>
+          </button>
+          <button class="infra-frequent-card infra-frequent-card--highlight" type="button" data-click="infra_applyShortcut('5746-1')">
+            <span class="infra-frequent-code">Código: 5746-1</span>
+            <strong>Transitar pelo acostamento</strong>
+            <span class="infra-frequent-art">Art. 193</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       AJUDA
+  ============================================================ -->
+  <section id="screen-help" class="screen">
+    <div class="back-row">
+      <button class="btn" data-click="go('home')">← Voltar</button>
+      <button class="btn btn-danger" data-click="go('ended')">Sair</button>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h2 class="card-title card-title-with-icon"><img src="AJUDA.png" alt="" class="card-title-icon" aria-hidden="true">Ajuda</h2>
+          <p class="card-sub">Resumo prático de como usar cada módulo do aplicativo.</p>
+        </div>
+      </div>
+
+      <div class="help-stack">
+        <section class="help-block">
+          <h3 class="help-title">Iniciando o Serviço</h3>
+          <p class="help-text">Gera o texto de início de serviço da guarnição.</p>
+          <ul class="help-list">
+            <li>Escolha a viatura ou use a opção manual.</li>
+            <li>Selecione a escala e os policiais.</li>
+            <li>Confirme a viatura e, ao final, gere o texto.</li>
+            <li>Use copiar ou WhatsApp para enviar.</li>
+          </ul>
+        </section>
+
+        <section class="help-block">
+          <h3 class="help-title">Relato de Envolvidos</h3>
+          <p class="help-text">Registra pessoas, veículos, relatos e fotos.</p>
+          <ul class="help-list">
+            <li>Adicione um envolvido por vez.</li>
+            <li>Preencha nome, contato, veículo, local e relato.</li>
+            <li>Anexe as fotos do envolvido no próprio card.</li>
+            <li>No fim, copie o texto ou envie por WhatsApp.</li>
+          </ul>
+        </section>
+
+        <section class="help-block">
+          <h3 class="help-title">Relato Policial</h3>
+          <p class="help-text">Monta o texto padronizado da ocorrência.</p>
+          <ul class="help-list">
+            <li>Preencha SADE, viatura, rodovia, cidade, km e horário.</li>
+            <li>Defina ocorrência, conhecimento, sentido e subtipo.</li>
+            <li>Se houver vítimas, informe as quantidades.</li>
+            <li>O texto é atualizado automaticamente na tela.</li>
+          </ul>
+        </section>
+
+        <section class="help-block">
+          <h3 class="help-title">Danos Aparentes</h3>
+          <p class="help-text">Permite registrar avarias de carro e motocicleta com apoio visual.</p>
+          <ul class="help-list">
+            <li>Escolha carro ou motocicleta.</li>
+            <li>Toque na peça/ponto desejado.</li>
+            <li>Selecione o tipo de dano.</li>
+            <li>Salve o veículo e gere o relatório individual ou geral.</li>
+          </ul>
+        </section>
+
+        <section class="help-block">
+          <h3 class="help-title">Relatório Completo</h3>
+          <p class="help-text">Consolida envolvidos e danos em um único relatório.</p>
+          <ul class="help-list">
+            <li>Gere o relatório completo com base no que foi preenchido antes.</li>
+            <li>Baixe o texto em `.txt` se necessário.</li>
+            <li>Compartilhe só as fotos dos envolvidos e do local.</li>
+            <li>Você pode anexar até 2 fotos do local nesta tela.</li>
+          </ul>
+        </section>
+
+        <section class="help-block">
+          <h3 class="help-title">Consulta de Infrações</h3>
+          <p class="help-text">Permite pesquisar rapidamente na base local de infrações.</p>
+          <ul class="help-list">
+            <li>Use a busca geral para localizar por código, descrição, artigo ou infrator.</li>
+            <li>Refine o resultado pelos filtros de categoria e medida administrativa.</li>
+            <li>A aba Consulta mostra os resultados completos da base carregada.</li>
+            <li>Ao tocar em uma infração frequente, a pesquisa é aplicada automaticamente.</li>
+          </ul>
+        </section>
+
+        <section class="help-block">
+          <h3 class="help-title">Infrações Frequente</h3>
+          <p class="help-text">Reúne os códigos mais usados para acesso rápido.</p>
+          <ul class="help-list">
+            <li>Toque no card da infração desejada para abrir a consulta com o código preenchido.</li>
+            <li>Os códigos aparecem destacados para facilitar a identificação visual.</li>
+            <li>Depois do toque, a tela volta para a aba de consulta com o filtro aplicado.</li>
+            <li>Use essa aba quando já souber a infração mais comum que deseja localizar.</li>
+          </ul>
+        </section>
+
+        <section class="help-block">
+          <h3 class="help-title">Fluxo Recomendado</h3>
+          <ul class="help-list">
+            <li>1. Iniciando o Serviço</li>
+            <li>2. Relato de Envolvidos</li>
+            <li>3. Relato Policial</li>
+            <li>4. Danos Aparentes</li>
+            <li>5. Relatório Completo</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ENCERRADO
+  ============================================================ -->
+  <section id="screen-ended" class="screen">
+    <div class="card ended-box">
+      <div class="ended-icon">🚔</div>
+      <h2 class="ended-title">Aplicativo encerrado</h2>
+      <p class="ended-sub">Você pode fechar esta aba ou retornar ao menu.</p>
+      <button class="btn btn-primary btn-lg" data-click="go('home')">← Voltar ao Menu</button>
+    </div>
+  </section>
+
+  <footer class="app-footer" role="contentinfo">
+    <div class="app-footer-badge">PMRv · 4 em 1</div>
+    <div class="app-footer-text">Desenvolvido por <span class="app-footer-author">Cabo Jeferson</span></div>
+  </footer>
+
+</div><!-- /.app -->
+
+<div id="dan-hover-tooltip" aria-hidden="true"></div>
+
+<!-- Modal fora do app para garantir z-index correto -->
+<div id="dan-modal-global" data-click="danFecharModalFora(event)" role="dialog" aria-modal="true" aria-label="Selecionar tipo de dano">
+  <div class="dan-modal-inner">
+    <div class="dan-modal-head">
+      <div id="dan-modal-title-g" class="dan-modal-title"></div>
+      <div id="dan-modal-sub-g" class="dan-modal-sub">Escolha o tipo de dano para registrar com rapidez.</div>
+    </div>
+    <div class="dan-dmg-grid">
+      <button class="dan-dmg-opt" id="dan-opt-amassado-g" data-click="danSelecionarDano('amassado')"><span class="opt-emoji">🔨</span>Amassado<span class="opt-desc">Impacto ou deformação</span></button>
+      <button class="dan-dmg-opt" id="dan-opt-riscado-g"  data-click="danSelecionarDano('riscado')"><span class="opt-emoji">✏️</span>Riscado<span class="opt-desc">Atrito superficial</span></button>
+      <button class="dan-dmg-opt" id="dan-opt-quebrado-g" data-click="danSelecionarDano('quebrado')"><span class="opt-emoji">💥</span>Quebrado<span class="opt-desc">Rompido ou partido</span></button>
+      <button class="dan-dmg-opt" id="dan-opt-trincado-g" data-click="danSelecionarDano('trincado')"><span class="opt-emoji">🔍</span>Trincado<span class="opt-desc">Fissura visível</span></button>
+    </div>
+    <div class="dan-modal-actions">
+      <button class="btn btn-danger btn-full" data-click="danRemoverDano()">✕ Remover dano</button>
+      <button class="btn btn-full" data-click="danFecharModal()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Galeria de Fotos -->
+<div id="foto-galeria-overlay" data-click="env_fecharGaleriaOnBackdrop(event)">
+  <div class="foto-galeria-header">
+    <span class="foto-galeria-titulo"></span>
+    <button class="btn btn-sm btn-danger" data-click="env_fecharGaleria()">✕ Fechar</button>
+  </div>
+  <div class="foto-galeria-grid"></div>
+  <div class="foto-galeria-actions">
+    <button class="btn btn-whats btn-lg" style="flex:1" data-click="env_whatsappFotos()">📲 Salvar e Enviar p/ WhatsApp</button>
+  </div>
+</div>
+
+<!-- Modal v360 Motocicleta -->
+<div class="v360-overlay" id="v360-overlay" data-click="v360closeModalOnBackdrop(event)">
+  <div class="v360-modal">
+    <h3 id="v360-m-title"></h3>
+    <p id="v360-m-sub">Selecione o tipo de avaria.</p>
+    <div class="v360-dano-grid">
+      <button class="v360-dbtn v360-d-amassou" data-val="Amassado" data-click="v360saveModal('Amassado')"><span class="opt-emoji">🔨</span>Amassado<span class="opt-desc">Impacto ou deformação</span></button>
+      <button class="v360-dbtn v360-d-riscado"  data-val="Riscado"  data-click="v360saveModal('Riscado')"><span class="opt-emoji">✏️</span>Riscado<span class="opt-desc">Atrito superficial</span></button>
+      <button class="v360-dbtn v360-d-quebrou"  data-val="Quebrado"  data-click="v360saveModal('Quebrado')"><span class="opt-emoji">💥</span>Quebrado<span class="opt-desc">Rompido ou partido</span></button>
+      <button class="v360-dbtn v360-d-trincou"  data-val="Trincado"  data-click="v360saveModal('Trincado')"><span class="opt-emoji">🔍</span>Trincado<span class="opt-desc">Fissura visível</span></button>
+    </div>
+    <div class="v360-modal-foot">
+      <button class="btn btn-danger btn-full" id="v360-btn-pend" style="display:none;" data-click="v360clearDano()">✕ Remover dano</button>
+      <button class="btn btn-full" data-click="v360closeModal()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SCRIPTS UNIFICADOS
+============================================================ -->
+  <script src="js/core.js"></script>
+  <script src="js/assuncao.js"></script>
+  <script src="js/envolvidos.js"></script>
+  <script src="js/pmrv.js"></script>
+  <script src="js/danos.js"></script>
+  <script src="js/relatorio.js"></script>
+  <script src="js/infracoes-data.js"></script>
+  <script src="js/infracoes.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+

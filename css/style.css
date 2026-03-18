@@ -1,0 +1,42 @@
+/* Arquivo consolidado de estilos para o PMRV 4 em 1.
+ *
+ * Este arquivo reúne os estilos existentes no projeto, incluindo o rodapé
+ * assinado e algumas melhorias responsivas.  Centralizar os estilos em um
+ * único arquivo facilita o versionamento e a manutenção.
+ */
+
+/* Rodapé com assinatura.  Você pode ajustar as cores utilizando
+   variáveis CSS (veja definições no <head> de index.html). */
+footer.footer-signature {
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 24px;
+  padding: 12px;
+  border-top: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.03);
+}
+
+footer.footer-signature .author {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+/* Grade responsiva para formulários.  Ajusta automaticamente o
+   número de colunas conforme a largura da tela. */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+/* Torna botões e layouts mais amigáveis em telas pequenas. */
+@media (max-width: 768px) {
+  .btn {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+  .steps {
+    flex-direction: column;
+  }
+}
