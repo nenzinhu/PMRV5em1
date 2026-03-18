@@ -40,3 +40,324 @@ footer.footer-signature .author {
     flex-direction: column;
   }
 }
+
+/* Separacao completa do HTML: utilitarios e componentes antes inline */
+.u-flex { display: flex; }
+.u-grid { display: grid; }
+.u-flex-1 { flex: 1; }
+.u-wrap { flex-wrap: wrap; }
+.u-ai-center { align-items: center; }
+.u-ai-start { align-items: flex-start; }
+.u-jc-between { justify-content: space-between; }
+.u-text-center { text-align: center; }
+.u-w-full { width: 100%; }
+.u-gap-5 { gap: 5px; }
+.u-gap-6 { gap: 6px; }
+.u-gap-8 { gap: 8px; }
+.u-gap-10 { gap: 10px; }
+.u-gap-12 { gap: 12px; }
+.u-grid-2 { grid-template-columns: 1fr 1fr; }
+.u-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.u-grid-4 { grid-template-columns: repeat(4, 1fr); }
+.u-grid-1 { grid-template-columns: 1fr; }
+.u-mt-4 { margin-top: 4px; }
+.u-mt-6 { margin-top: 6px; }
+.u-mt-8 { margin-top: 8px; }
+.u-mt-10 { margin-top: 10px; }
+.u-mt-12 { margin-top: 12px; }
+.u-mt-14 { margin-top: 14px; }
+.u-mt-16 { margin-top: 16px; }
+.u-mb-4 { margin-bottom: 4px; }
+.u-mb-6 { margin-bottom: 6px; }
+.u-mb-8 { margin-bottom: 8px; }
+.u-mb-10 { margin-bottom: 10px; }
+.u-mb-12 { margin-bottom: 12px; }
+.u-mb-14 { margin-bottom: 14px; }
+.u-py-compact { padding: 6px; }
+.u-hidden-input { display: none; }
+
+.section-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 14px 0;
+}
+
+.panel-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  color: var(--label);
+}
+
+.empty-state-card {
+  font-size: 13px;
+  color: var(--label);
+  text-align: center;
+  padding: 18px;
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+}
+
+.detail-readout {
+  margin-top: 8px;
+  padding: 10px 12px;
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  background: rgba(245,130,32,.06);
+  font-size: 13px;
+  color: var(--text);
+  font-weight: 700;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+}
+
+.photo-upload-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.photo-upload-label {
+  flex-direction: column;
+  padding: 12px 6px;
+  font-size: 12px;
+}
+
+.photo-upload-icon {
+  font-size: 20px;
+  margin-bottom: 3px;
+}
+
+.action-toolbar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.action-toolbar-compact {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.report-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.report-stat-card {
+  text-align: center;
+  padding: 16px 10px;
+  min-height: 112px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.report-stat-value-success {
+  font-size: 32px;
+  font-weight: 900;
+  color: #22c55e;
+}
+
+.report-stat-value-warning {
+  font-size: 32px;
+  font-weight: 900;
+  color: #f59e0b;
+}
+
+.report-stat-label {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+
+.form-helper-note {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+.report-output-text {
+  white-space: pre-wrap;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text);
+  font-family: inherit;
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.two-column-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.two-column-actions-spaced {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.vehicle-picker-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: .35px;
+  color: #fff;
+}
+
+.vehicle-picker-image {
+  height: 80px;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.vehicle-picker-label {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 900;
+}
+
+#ass_mesa_btn {
+  width: 100%;
+  font-size: 15px;
+  padding: 12px;
+}
+
+#ass_build_vtr_label {
+  display: none;
+  margin-top: 8px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: rgba(59,130,246,.12);
+  color: #3b82f6;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+#ass_build_tipo_section { display: none; margin-top: 10px; }
+#ass_build_tipo_input,
+#ass_build_horario { width: 100%; }
+#ass_build_grupos_grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+#ass_build_nomes_grid {
+  display: none;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+#ass_build_grad_manual { flex: 0 0 130px; }
+#ass_build_pol_chips_wrap { display: none; margin-top: 8px; }
+#ass_build_pol_chips { display: flex; flex-wrap: wrap; gap: 5px; }
+#ass_lotes_wrap { display: none; }
+
+.form-span-1 { grid-column: span 1; }
+#pmrv_input_hora { width: 110px; padding: 6px; }
+
+.result-box-spaced { margin-top: 20px; }
+
+#dan-salvos-area,
+#dan-todos-result-area,
+#dan-step-diagram,
+#dan-step-moto360,
+#dan-result-area,
+#v360-result-area,
+#dan-foto-actions-carro,
+#dan-foto-actions-moto,
+#rel-local-actions,
+#rel-result-area,
+#v360-btn-pend {
+  display: none;
+}
+
+#dan-salvos-area { margin-top: 16px; }
+#dan-todos-result-area,
+#dan-result-area,
+#v360-result-area,
+#rel-result-area { margin-top: 14px; }
+#dan-veh-badge { font-size: 28px; }
+
+#dan-diagram-area {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+}
+
+#dan-hint-txt {
+  font-size: 11px;
+  color: var(--label);
+  margin: 0;
+}
+
+.legend-helper {
+  padding: 4px 12px 5px;
+  font-size: 11px;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  background: rgba(245,158,11,.06);
+}
+
+.report-hero-card {
+  border-left: 4px solid #8b5cf6;
+  margin-bottom: 4px;
+}
+
+.report-hero-icon {
+  font-size: 30px;
+  margin-bottom: 6px;
+}
+
+.report-hero-title { margin: 0 0 4px; }
+.report-hero-sub { color: var(--muted); font-size: 13px; }
+
+.rel-generate-btn {
+  background: linear-gradient(135deg,#7c3aed,#8b5cf6);
+}
+
+@media (max-width: 640px) {
+  .report-stats-grid,
+  .two-column-actions,
+  .two-column-actions-spaced,
+  .vehicle-picker-grid,
+  .photo-upload-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .action-toolbar,
+  .action-toolbar-compact {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .report-stat-card {
+    min-height: 0;
+  }
+}

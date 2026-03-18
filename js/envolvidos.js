@@ -119,11 +119,15 @@ function env_abrirGaleria(card) {
   overlay.dataset.veiculo = veiculo;
   overlay.dataset.qtd     = fotos.length;
   overlay._fotos = fotos.map(f => f.src);
+  overlay.hidden = false;
   overlay.classList.add('open');
+  overlay.querySelector('button')?.focus();
 }
 
 function env_fecharGaleria() {
-  document.getElementById('foto-galeria-overlay').classList.remove('open');
+  const overlay = document.getElementById('foto-galeria-overlay');
+  overlay.classList.remove('open');
+  overlay.hidden = true;
 }
 
 function env_fecharGaleriaOnBackdrop(event) {

@@ -497,7 +497,9 @@ function danFotoCompartilhar(gridId) {
   overlay.dataset.veiculo = titulo;
   overlay.dataset.qtd     = fotos.length;
   overlay._fotos          = fotos.map(f => f.src);
+  overlay.hidden = false;
   overlay.classList.add('open');
+  overlay.querySelector('button')?.focus();
 }
 
 function danMudarVista(v) {
@@ -952,11 +954,16 @@ function danAbrirModal(id) {
     btn.className = 'dan-dmg-opt' + (danDanos[id] === t ? ' sel-' + t : '');
   });
 
-  document.getElementById('dan-modal-global').classList.add('open');
+  const modal = document.getElementById('dan-modal-global');
+  modal.hidden = false;
+  modal.classList.add('open');
+  modal.querySelector('.dan-dmg-opt')?.focus();
 }
 
 function danFecharModal() {
-  document.getElementById('dan-modal-global').classList.remove('open');
+  const modal = document.getElementById('dan-modal-global');
+  modal.classList.remove('open');
+  modal.hidden = true;
   danPontoAberto = null;
 }
 
@@ -1194,7 +1201,9 @@ function v360clearDano(){
 }
 
 function v360closeModal(){
-  document.getElementById('v360-overlay').classList.remove('show');
+  const overlay = document.getElementById('v360-overlay');
+  overlay.classList.remove('show');
+  overlay.hidden = true;
   v360editId = null;
 }
 
@@ -1212,7 +1221,10 @@ function v360openEdit(id){
   });
   const btnPend = document.getElementById('v360-btn-pend');
   if(btnPend) btnPend.style.display = item.dano !== null ? '' : 'none';
-  document.getElementById('v360-overlay').classList.add('show');
+  const overlay = document.getElementById('v360-overlay');
+  overlay.hidden = false;
+  overlay.classList.add('show');
+  overlay.querySelector('.v360-dbtn')?.focus();
 }
 
 function v360EditarResumo(tab, id) {
