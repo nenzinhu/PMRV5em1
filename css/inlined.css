@@ -68,23 +68,6 @@
       background-size: 32px 32px;
     }
 
-    .skip-link {
-      position: absolute;
-      left: 12px;
-      top: -48px;
-      z-index: 400;
-      padding: 10px 14px;
-      border-radius: 12px;
-      background: #fff3e2;
-      color: #100a05;
-      font-weight: 800;
-      text-decoration: none;
-      transition: top var(--dur) var(--ease);
-    }
-    .skip-link:focus {
-      top: 12px;
-    }
-
 
 
     .app {
@@ -94,9 +77,6 @@
     }
     .app.app-wide {
       max-width: min(1380px, calc(100vw - 24px));
-    }
-    .app.app-pocket {
-      max-width: min(920px, calc(100vw - 16px));
     }
 
     /* ============================================================
@@ -226,17 +206,11 @@
     /* ============================================================
        SECTION / SCREEN
     ============================================================ */
-    .screen {
-      display: none;
-      margin-top: 12px;
-      align-content: start;
-    }
+    .screen { display: none; margin-top: 12px; }
     .screen.active {
-      display: grid;
-      gap: 14px;
+      display: block;
       animation: fadeUp 220ms var(--ease) both;
     }
-    .screen[aria-hidden="true"] { display: none; }
     .screen-app {
       min-height: calc(100vh - 144px);
     }
@@ -249,22 +223,11 @@
        CARD
     ============================================================ */
     .card {
-      position: relative;
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: var(--r-xl);
       padding: 20px;
       box-shadow: 0 4px 24px rgba(0,0,0,.35);
-      overflow: hidden;
-    }
-
-    .screen > .card::before {
-      content: '';
-      position: absolute;
-      inset: 0 0 auto 0;
-      height: 3px;
-      background: linear-gradient(90deg, rgba(245,130,32,.95), rgba(216,42,46,.75), rgba(252,236,29,.25));
-      opacity: .9;
     }
 
     .card-header {
@@ -272,9 +235,7 @@
       align-items: flex-start;
       justify-content: space-between;
       gap: 12px;
-      margin-bottom: 18px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid rgba(245,130,32,.12);
+      margin-bottom: 16px;
     }
 
     .card-title {
@@ -413,21 +374,14 @@
     .back-row {
       display: flex;
       gap: 8px;
-      margin-bottom: 0;
-      padding: 8px;
-      border: 1px solid rgba(245,130,32,.14);
-      border-radius: 16px;
-      background: rgba(13,13,13,.72);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: 0 6px 20px rgba(0,0,0,.18);
+      margin-bottom: 12px;
     }
 
     /* ============================================================
        FORM SYSTEM
     ============================================================ */
-    .form-grid   { display: flex; flex-direction: column; gap: 16px; }
-    .form-row    { display: grid; gap: 12px; }
+    .form-grid   { display: flex; flex-direction: column; gap: 14px; }
+    .form-row    { display: grid; gap: 10px; }
     .form-row-2  { grid-template-columns: 1fr 1fr; }
     .form-row-3  { grid-template-columns: 1fr 1fr 1fr; }
     @media (max-width: 520px) {
@@ -555,20 +509,16 @@
     .result-box {
       display: none;
       margin-top: 16px;
-      padding-top: 14px;
-      border-top: 1px solid rgba(245,130,32,.12);
       animation: fadeUp 200ms var(--ease) both;
     }
     .result-box.visible { display: block; }
 
     .infra-page {
       min-height: calc(100vh - 190px);
-      padding: 14px;
-      padding-bottom: 96px;
+      padding: 18px;
       overflow: hidden;
       background:
-        radial-gradient(circle at top right, rgba(245,130,32,.16), transparent 24%),
-        radial-gradient(circle at bottom left, rgba(216,42,46,.08), transparent 28%),
+        radial-gradient(circle at top right, rgba(245,130,32,.14), transparent 24%),
         linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)),
         var(--card);
     }
@@ -577,9 +527,9 @@
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      gap: 12px;
-      padding: 16px;
-      margin-bottom: 14px;
+      gap: 16px;
+      padding: 20px;
+      margin-bottom: 16px;
       border: 1px solid rgba(245,130,32,.18);
       border-radius: 18px;
       background:
@@ -607,12 +557,12 @@
     }
 
     .infra-title {
-      margin-bottom: 6px;
-      font-size: 26px;
+      margin-bottom: 8px;
+      font-size: 28px;
     }
 
     .infra-sub {
-      max-width: 62ch;
+      max-width: 78ch;
       margin: 0;
     }
 
@@ -644,9 +594,9 @@
 
     .infra-filter-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.6fr) repeat(3, minmax(140px, .7fr));
-      gap: 10px;
-      margin-bottom: 12px;
+      grid-template-columns: minmax(0, 2.2fr) minmax(180px, .8fr) minmax(220px, .95fr) minmax(140px, .5fr);
+      gap: 12px;
+      margin-bottom: 16px;
     }
 
     .infra-filter-action {
@@ -657,8 +607,8 @@
 
     .infra-tabs {
       display: flex;
-      gap: 8px;
-      margin-bottom: 12px;
+      gap: 10px;
+      margin-bottom: 16px;
       flex-wrap: wrap;
     }
 
@@ -692,12 +642,12 @@
     .infra-stats {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      margin-bottom: 12px;
+      gap: 12px;
+      margin-bottom: 16px;
     }
 
     .infra-stat {
-      padding: 14px;
+      padding: 16px;
       border-radius: 16px;
       background: rgba(255,255,255,.04);
       border: 1px solid rgba(245,130,32,.14);
@@ -716,38 +666,10 @@
     .infra-stat strong {
       display: block;
       color: #fff;
-      font-size: 23px;
+      font-size: 26px;
       font-weight: 900;
       line-height: 1.1;
       text-shadow: 0 0 16px rgba(245,130,32,.16);
-    }
-
-    .infra-pocket-strip {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 12px;
-      overflow-x: auto;
-      padding-bottom: 4px;
-      scrollbar-width: thin;
-    }
-
-    .infra-quick-chip {
-      flex: 0 0 auto;
-      border: 1px solid rgba(245,130,32,.18);
-      background: rgba(255,255,255,.04);
-      color: #fff3e2;
-      border-radius: 999px;
-      padding: 10px 14px;
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: .25px;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    .infra-quick-chip:hover {
-      border-color: rgba(245,130,32,.32);
-      background: rgba(245,130,32,.12);
     }
 
     .infra-panel {
@@ -776,126 +698,10 @@
       font-size: 13px;
     }
 
-    .infra-results-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 12px 18px;
-      border-bottom: 1px solid rgba(245,130,32,.1);
-      background: rgba(255,255,255,.02);
-    }
-
-    .infra-results-head strong {
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: .5px;
-      text-transform: uppercase;
-      color: #fff0de;
-    }
-
-    .infra-results-head span {
-      color: var(--muted);
-      font-size: 12px;
-      text-align: right;
-    }
-
-    .infra-card-list {
-      display: grid;
-      gap: 12px;
-      padding: 14px;
-      max-height: calc(100vh - 360px);
-      overflow: auto;
-    }
-
-    .infra-record-card {
-      padding: 14px;
-      border-radius: 16px;
-      border: 1px solid rgba(245,130,32,.14);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.12));
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
-    }
-
-    .infra-record-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .infra-record-code {
-      border: 1px solid rgba(245,130,32,.26);
-      background: rgba(245,130,32,.12);
-      color: #fff5e8;
-      border-radius: 999px;
-      padding: 8px 12px;
-      font-size: 13px;
-      font-weight: 900;
-      letter-spacing: .45px;
-      cursor: pointer;
-    }
-
-    .infra-record-value {
-      color: #ffd19b;
-      font-size: 15px;
-      font-weight: 900;
-      white-space: nowrap;
-    }
-
-    .infra-record-title {
-      margin-bottom: 10px;
-      color: #fff3e2;
-      font-size: 15px;
-      line-height: 1.45;
-    }
-
-    .infra-record-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-
-    .infra-record-meta {
-      display: grid;
-      gap: 8px;
-    }
-
-    .infra-record-line {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 10px;
-      padding-top: 8px;
-      border-top: 1px solid rgba(245,130,32,.08);
-    }
-
-    .infra-record-line span {
-      color: var(--muted);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .4px;
-      text-transform: uppercase;
-    }
-
-    .infra-record-line strong {
-      color: #fff;
-      font-size: 13px;
-      font-weight: 700;
-      text-align: right;
-      line-height: 1.45;
-    }
-
     .infra-table-wrap {
       position: relative;
       overflow: auto;
       max-height: calc(100vh - 330px);
-    }
-
-    .infra-table-wrap-hidden {
-      display: none;
     }
 
     .infra-table {
@@ -1061,57 +867,6 @@
     .infra-frequent-card--highlight:hover {
       border-color: rgba(245,130,32,.28);
       background: linear-gradient(180deg, rgba(245,130,32,.1), rgba(0,0,0,.16));
-    }
-
-    .infra-bottom-bar {
-      position: sticky;
-      bottom: 10px;
-      z-index: 30;
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 8px;
-      margin-top: 14px;
-      padding: 10px;
-      border: 1px solid rgba(245,130,32,.2);
-      border-radius: 18px;
-      background: rgba(10,5,0,.94);
-      box-shadow: 0 14px 30px rgba(0,0,0,.38);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-    }
-
-    .infra-bottom-btn {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      min-height: 58px;
-      padding: 8px 6px;
-      border: 1px solid rgba(245,130,32,.12);
-      border-radius: 14px;
-      background: rgba(255,255,255,.04);
-      color: #fff;
-      cursor: pointer;
-      text-align: center;
-    }
-
-    .infra-bottom-btn strong {
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: .3px;
-      text-transform: uppercase;
-    }
-
-    .infra-bottom-icon {
-      color: #ffd19b;
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .infra-bottom-btn-primary {
-      background: linear-gradient(135deg, rgba(245,130,32,.22), rgba(216,42,46,.12));
-      border-color: rgba(245,130,32,.28);
     }
 
     .result-label {
@@ -1643,41 +1398,8 @@
       .infra-stats { grid-template-columns: 1fr; }
       .infra-tabs { flex-direction: column; }
       .infra-tab-btn { width: 100%; }
-      .infra-results-head { flex-direction: column; align-items: flex-start; }
-      .infra-results-head span { text-align: left; }
-      .infra-card-list { max-height: none; padding: 12px; }
-      .infra-record-head,
-      .infra-record-line { flex-direction: column; align-items: flex-start; }
-      .infra-record-line strong { text-align: left; }
       .infra-table-wrap { max-height: none; }
       .infra-table { min-width: 920px; }
-      .infra-bottom-bar {
-        position: fixed;
-        left: 10px;
-        right: 10px;
-        bottom: max(10px, env(safe-area-inset-bottom));
-        margin-top: 0;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .screen.active { gap: 12px; }
-      .back-row {
-        grid-template-columns: 1fr 1fr;
-        display: grid;
-      }
-      .card-header {
-        margin-bottom: 16px;
-        padding-bottom: 12px;
-      }
-    }
-
-    @media (min-width: 701px) {
-      .infra-bottom-bar {
-        max-width: 520px;
-        margin-left: auto;
-        margin-right: auto;
-      }
     }
 
     .vtr-grid {

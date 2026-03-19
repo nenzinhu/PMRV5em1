@@ -1,4 +1,4 @@
-const CACHE_NAME = 'pmrv-4em1-v4';
+const CACHE_NAME = 'pmrv-4em1-v3';
 const APP_SHELL = [
   './',
   './index.html',
@@ -11,8 +11,6 @@ const APP_SHELL = [
   './js/pmrv.js',
   './js/danos.js',
   './js/relatorio.js',
-  './js/infracoes.js',
-  './data/infracoes.json',
   './icon-192.png',
   './icon-512.png',
   './icon.png',

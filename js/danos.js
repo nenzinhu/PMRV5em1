@@ -134,6 +134,19 @@ let danVista        = 'frontal';
 let danPontoAberto  = null;
 let danVeiculosSalvos = [];
 let danTooltipHideTimer = null;
+let danLastFastTap = 0;
+
+function danFastActivate(handler) {
+  return function (event) {
+    const now = Date.now();
+    if (event.type === 'click' && now - danLastFastTap < 450) return;
+    if (event.type === 'pointerup') {
+      danLastFastTap = now;
+      event.preventDefault();
+    }
+    handler(event);
+  };
+}
 
 function danAdicionarVeiculo(tipo) {
   if (danVeiculos.length >= 5) { alert('Limite de 5 veículos atingido!'); return; }
@@ -203,8 +216,9 @@ function danRenderDiagramaMulti(idx) {
     const rRing= r * 1.45;
     const fSize= r * 0.75;
     hs += `
-      <g style="cursor:pointer;transform-origin:${cx}px ${cy}px" data-click="danAbrirModalMulti(${idx},'${p.id}')">
+      <g style="cursor:pointer;transform-origin:${cx}px ${cy}px" data-click="danAbrirModalMulti(${idx},'${p.id}')" data-pointerdown="danAbrirModalMulti(${idx},'${p.id}')">
         <title>${p.label}</title>
+        <circle cx="${cx}" cy="${cy}" r="${r * 1.95}" fill="transparent"/>
         <circle cx="${cx}" cy="${cy}" r="${rRing}" fill="none" stroke="${cor}" stroke-width="1.5" stroke-dasharray="4 2" opacity="${dano?'1':'0.5'}"/>
         <circle cx="${cx}" cy="${cy}" r="${r}" fill="${dano ? cor : 'rgba(10,20,60,0.82)'}" stroke="${cor}" stroke-width="2" data-part-label="${p.label}" data-zoom-src="${zoomSrc}" data-zoom-x="${p.px}" data-zoom-y="${p.py}" data-zoom-scale="${v.tipo === 'carro' ? 420 : 300}"/>
         <text x="${cx}" y="${cy + fSize*0.38}" text-anchor="middle" dominant-baseline="middle"
@@ -497,9 +511,7 @@ function danFotoCompartilhar(gridId) {
   overlay.dataset.veiculo = titulo;
   overlay.dataset.qtd     = fotos.length;
   overlay._fotos          = fotos.map(f => f.src);
-  overlay.hidden = false;
   overlay.classList.add('open');
-  overlay.querySelector('button')?.focus();
 }
 
 function danMudarVista(v) {
@@ -580,8 +592,9 @@ function danRenderDiagrama() {
     const cy   = coords.y;
 
     hs += `
-      <g style="cursor:pointer;transform-origin:${cx}px ${cy}px" data-click="danAbrirModal('${p.id}')">
+      <g style="cursor:pointer;transform-origin:${cx}px ${cy}px" data-click="danAbrirModal('${p.id}')" data-pointerdown="danAbrirModal('${p.id}')">
         <title>${p.label}</title>
+        <circle cx="${cx}" cy="${cy}" r="${r * 1.95}" fill="transparent"/>
         <circle cx="${cx}" cy="${cy}" r="${rRing}" fill="none" stroke="${cor}" stroke-width="1.5" stroke-dasharray="4 2" opacity="${dano?'1':'0.5'}"/>
         <circle cx="${cx}" cy="${cy}" r="${r}" fill="${dano ? cor : 'rgba(10,20,60,0.82)'}" stroke="${cor}" stroke-width="2" data-part-label="${p.label}" data-zoom-src="${zoomSrc}" data-zoom-x="${ref.px}" data-zoom-y="${ref.py}" data-zoom-scale="${danVeiculo === 'carro' ? 420 : 300}"/>
         <text x="${cx}" y="${cy + fSize*0.38}" text-anchor="middle" dominant-baseline="middle"
@@ -954,16 +967,11 @@ function danAbrirModal(id) {
     btn.className = 'dan-dmg-opt' + (danDanos[id] === t ? ' sel-' + t : '');
   });
 
-  const modal = document.getElementById('dan-modal-global');
-  modal.hidden = false;
-  modal.classList.add('open');
-  modal.querySelector('.dan-dmg-opt')?.focus();
+  document.getElementById('dan-modal-global').classList.add('open');
 }
 
 function danFecharModal() {
-  const modal = document.getElementById('dan-modal-global');
-  modal.classList.remove('open');
-  modal.hidden = true;
+  document.getElementById('dan-modal-global').classList.remove('open');
   danPontoAberto = null;
 }
 
@@ -1020,7 +1028,7 @@ function danAtualizarSummary() {
       if (!ponto) return;
       const tipo = danDanos[id];
       const num  = cfg.pontos.indexOf(ponto) + 1;
-      html += `<span class="dan-tag dan-tag-${tipo}" data-click="danEditarResumo('${vista}','${id}')" title="Clique para editar">${DAN_DMG_EMOJI[tipo]} ${num}. ${ponto.label} — ${tipo}</span>`;
+      html += `<span class="dan-tag dan-tag-${tipo}" data-click="danEditarResumo('${vista}','${id}')" data-pointerdown="danEditarResumo('${vista}','${id}')" title="Clique para editar">${DAN_DMG_EMOJI[tipo]} ${num}. ${ponto.label} — ${tipo}</span>`;
     });
     html += '</div></div>';
   });
@@ -1201,9 +1209,7 @@ function v360clearDano(){
 }
 
 function v360closeModal(){
-  const overlay = document.getElementById('v360-overlay');
-  overlay.classList.remove('show');
-  overlay.hidden = true;
+  document.getElementById('v360-overlay').classList.remove('show');
   v360editId = null;
 }
 
@@ -1221,10 +1227,7 @@ function v360openEdit(id){
   });
   const btnPend = document.getElementById('v360-btn-pend');
   if(btnPend) btnPend.style.display = item.dano !== null ? '' : 'none';
-  const overlay = document.getElementById('v360-overlay');
-  overlay.hidden = false;
-  overlay.classList.add('show');
-  overlay.querySelector('.v360-dbtn')?.focus();
+  document.getElementById('v360-overlay').classList.add('show');
 }
 
 function v360EditarResumo(tab, id) {
@@ -1257,7 +1260,9 @@ function v360render(){
     pin.setAttribute('data-zoom-y', item.y);
     pin.setAttribute('data-zoom-scale', '300');
 
-    pin.onclick = () => v360openEdit(item.id);
+    const openPin = danFastActivate(() => v360openEdit(item.id));
+    pin.addEventListener('pointerup', openPin);
+    pin.addEventListener('click', openPin);
 
     document.getElementById('v360-canvas').appendChild(pin);
   });
@@ -1340,7 +1345,7 @@ function v360updateSummary(){
     v360db[t].filter(i=>i.dano!==null).forEach(item => {
       const cor   = v360corDano(item.dano);
       const emoji = item.dano==='Quebrado'?'🔴':item.dano==='Trincado'?'🟠':item.dano==='Riscado'?'🟡':'🟣';
-      avTags.push(`<span class="dan-tag" style="background:${cor};color:#fff;cursor:pointer;" data-click="v360EditarResumo('${t}',${item.id})" title="Clique para editar">${emoji} ${item.num}. ${item.nome} — ${item.dano}</span>`);
+      avTags.push(`<span class="dan-tag" style="background:${cor};color:#fff;cursor:pointer;" data-click="v360EditarResumo('${t}',${item.id})" data-pointerdown="v360EditarResumo('${t}',${item.id})" title="Clique para editar">${emoji} ${item.num}. ${item.nome} — ${item.dano}</span>`);
     });
   });
 

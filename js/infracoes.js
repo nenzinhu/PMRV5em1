@@ -5,11 +5,8 @@
     records: [],
     categories: [],
     measures: [],
-    filteredRecords: [],
     elements: null,
-    lastFilterKey: '',
-    renderLimit: 160,
-    inputTimer: null
+    searchFeedbackTimer: null
   };
 
   const SEARCH_SYNONYM_GROUPS = [
@@ -90,7 +87,6 @@
     if (state.elements) return state.elements;
 
     state.elements = {
-      form: document.querySelector('#screen-infracoes form.infra-filter-grid'),
       search: document.getElementById('infra_search'),
       category: document.getElementById('infra_category'),
       measure: document.getElementById('infra_measure'),
@@ -104,9 +100,12 @@
       categoryCount: document.getElementById('infra_categoryCount'),
       status: document.getElementById('infra_status'),
       summary: document.getElementById('infra_summary'),
-      cards: document.getElementById('infra_cards'),
-      tableBody: document.getElementById('infra_tableBody'),
-      emptyState: document.getElementById('infra_emptyState')
+      emptyState: document.getElementById('infra_emptyState'),
+      resultsList: document.getElementById('infra_resultsList'),
+      filterToggle: document.getElementById('infra_filterToggle'),
+      advancedFilters: document.getElementById('infra_advancedFilters'),
+      loadingBar: document.getElementById('infra_loadingBar'),
+      liveBadge: document.getElementById('infra_liveBadge')
     };
 
     return state.elements;
@@ -311,6 +310,39 @@
       .replace(/'/g, '&#39;');
   }
 
+  function summarizeType(record) {
+    if (record.categoria && record.categoria !== 'Sem categoria') return record.categoria;
+    if (record.infrator) return record.infrator;
+    return 'Infração catalogada';
+  }
+
+  function setSearchFeedback(isSearching) {
+    const elements = getElements();
+
+    if (state.searchFeedbackTimer) {
+      clearTimeout(state.searchFeedbackTimer);
+      state.searchFeedbackTimer = null;
+    }
+
+    if (elements.search) {
+      const searchBox = elements.search.closest('.infra-searchbox');
+      if (searchBox) searchBox.classList.toggle('is-searching', isSearching);
+    }
+
+    if (elements.loadingBar) elements.loadingBar.hidden = !isSearching;
+
+    if (elements.liveBadge) {
+      elements.liveBadge.textContent = isSearching ? 'Pesquisando...' : 'Resultados atualizados';
+      elements.liveBadge.classList.toggle('is-searching', isSearching);
+    }
+
+    if (isSearching) {
+      state.searchFeedbackTimer = setTimeout(function () {
+        setSearchFeedback(false);
+      }, 220);
+    }
+  }
+
   function fillSelect(select, values, emptyLabel) {
     const current = select.value;
     select.innerHTML = '<option value="">' + emptyLabel + '</option>' + values.map(function (value) {
@@ -360,6 +392,7 @@
   }
 
   function mapRecords(rows) {
+    const elements = getElements();
     if (!rows.length) {
       elements.status.textContent = 'Base vazia';
       elements.summary.textContent = 'Nenhum registro foi encontrado na base local.';
@@ -483,14 +516,8 @@
     const elements = getElements();
     const isConsulta = tab !== 'frequentes';
 
-    if (elements.tabConsulta) {
-      elements.tabConsulta.classList.toggle('active', isConsulta);
-      elements.tabConsulta.setAttribute('aria-selected', isConsulta ? 'true' : 'false');
-    }
-    if (elements.tabFrequentes) {
-      elements.tabFrequentes.classList.toggle('active', !isConsulta);
-      elements.tabFrequentes.setAttribute('aria-selected', !isConsulta ? 'true' : 'false');
-    }
+    if (elements.tabConsulta) elements.tabConsulta.classList.toggle('active', isConsulta);
+    if (elements.tabFrequentes) elements.tabFrequentes.classList.toggle('active', !isConsulta);
 
     if (elements.panelConsulta) {
       elements.panelConsulta.classList.toggle('active', isConsulta);
@@ -505,13 +532,11 @@
 
   function render(records) {
     const elements = getElements();
-    state.filteredRecords = records.slice();
-    const visibleRecords = records.length > state.renderLimit ? records.slice(0, state.renderLimit) : records;
 
     updateStats(state.records, records);
 
     if (!records.length) {
-      if (elements.cards) elements.cards.innerHTML = '';
+      elements.tableBody.innerHTML = '';
       elements.emptyState.hidden = false;
       elements.status.textContent = 'Nenhum resultado encontrado';
       elements.summary.textContent = 'Ajuste os filtros para ampliar a pesquisa na base local.';
@@ -519,37 +544,12 @@
     }
 
     elements.emptyState.hidden = true;
-    elements.status.textContent = records.length.toLocaleString('pt-BR') + ' resultados encontrados';
-    elements.summary.textContent = records.length > visibleRecords.length
-      ? 'Mostrando as primeiras ' + visibleRecords.length.toLocaleString('pt-BR') + ' infrações para manter a consulta rápida.'
-      : state.records.length === records.length
-        ? 'Base completa carregada para consulta local.'
-        : 'Resultados filtrados sobre ' + state.records.length.toLocaleString('pt-BR') + ' registros da base.';
+    elements.status.textContent = records.length.toLocaleString('pt-BR') + ' infrações listadas';
+    elements.summary.textContent = state.records.length === records.length
+      ? 'Base completa carregada para consulta local.'
+      : 'Resultados filtrados sobre ' + state.records.length.toLocaleString('pt-BR') + ' registros da base.';
 
-    if (elements.cards) {
-      elements.cards.innerHTML = visibleRecords.map(function (record) {
-        const measureText = record.medida || 'Sem medida';
-        return [
-          '<li class="infra-record-card">',
-          '<div class="infra-record-head">',
-          '<button class="infra-record-code" type="button" data-click="infra_applyShortcut(\'' + escapeHtml(record.codigo) + '\')">' + escapeHtml(record.codigo) + '</button>',
-          '<span class="infra-record-value">' + escapeHtml(formatCurrency(record.valor)) + '</span>',
-          '</div>',
-          '<h3 class="infra-record-title">' + escapeHtml(record.descricao) + '</h3>',
-          '<div class="infra-record-tags">',
-          '<span class="infra-badge ' + categoryClass(record.categoria) + '">' + escapeHtml(record.categoria) + '</span>',
-          '<span class="infra-measure ' + measureClass(record.medida) + '">' + escapeHtml(measureText) + '</span>',
-          '</div>',
-          '<div class="infra-record-meta">',
-          '<div class="infra-record-line"><span>Artigo</span><strong>' + escapeHtml(record.artigo || 'Não informado') + '</strong></div>',
-          '<div class="infra-record-line"><span>Infrator</span><strong>' + escapeHtml(record.infrator || 'Não informado') + '</strong></div>',
-          '</div>',
-          '</li>'
-        ].join('');
-      }).join('');
-    }
-
-    if (false && elements.tableBody) elements.tableBody.innerHTML = records.map(function (record) {
+    elements.tableBody.innerHTML = records.map(function (record) {
       const measureText = record.medida || 'Sem medida';
       return [
         '<tr>',
@@ -570,10 +570,6 @@
     const term = normalizeSearchText(elements.search.value);
     const category = elements.category.value;
     const measure = elements.measure.value;
-    const filterKey = [term, category, measure].join('|');
-
-    if (filterKey === state.lastFilterKey) return;
-    state.lastFilterKey = filterKey;
 
     const termParts = term ? expandSearchIntent(term) : [];
     const forcedCode = resolveCodeShortcut(term);
@@ -587,33 +583,6 @@
     });
 
     render(filtered);
-  }
-
-  function infra_clearFilters() {
-    const elements = getElements();
-    if (!elements.search) return;
-
-    state.lastFilterKey = '';
-    elements.search.value = '';
-    elements.category.value = '';
-    elements.measure.value = '';
-    infra_showTab('consulta');
-    render(state.records);
-  }
-
-  function infra_focusSearch() {
-    const elements = getElements();
-    if (!elements.search) return;
-
-    infra_showTab('consulta');
-    elements.search.focus();
-    elements.search.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
-
-  function infra_scrollTop() {
-    const panel = document.querySelector('#screen-infracoes .card');
-    if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   function infra_applyShortcut(term) {
@@ -631,48 +600,21 @@
     if (elements.search.dataset.bound === 'true') return;
 
     elements.search.dataset.bound = 'true';
-    if (elements.form) {
-      elements.form.addEventListener('submit', function (event) {
-        event.preventDefault();
-        applyFilters();
-      });
-    }
-    elements.search.addEventListener('input', function () {
-      window.clearTimeout(state.inputTimer);
-      state.inputTimer = window.setTimeout(applyFilters, 120);
-    });
+    elements.search.addEventListener('input', applyFilters);
     elements.category.addEventListener('change', applyFilters);
     elements.measure.addEventListener('change', applyFilters);
-    elements.clear.addEventListener('click', infra_clearFilters);
+    elements.clear.addEventListener('click', function () {
+      elements.search.value = '';
+      elements.category.value = '';
+      elements.measure.value = '';
+      render(state.records);
+    });
   }
 
   function decodeEmbeddedBase64(base64) {
     return new TextDecoder('utf-8').decode(Uint8Array.from(atob(base64), function (char) {
       return char.charCodeAt(0);
     }));
-  }
-
-  function mapJsonRecords(records) {
-    if (!Array.isArray(records)) return [];
-
-    return records
-      .map(function (record) {
-        const normalizedRecord = {
-          codigo: safeText(record && record.codigo),
-          descricao: safeText(record && record.descricao),
-          artigo: safeText(record && record.artigo),
-          infrator: safeText(record && record.infrator),
-          categoria: normalizeCategory(record && record.categoria),
-          medida: normalizeMeasure(record && record.medida),
-          valor: parseValue(record && record.valor)
-        };
-
-        normalizedRecord.search = buildSearchIndex(normalizedRecord);
-        return normalizedRecord;
-      })
-      .filter(function (record) {
-        return record.codigo || record.descricao || record.artigo;
-      });
   }
 
   function loadOptionalText(paths) {
@@ -698,8 +640,9 @@
     return next();
   }
 
-  function loadJsonRecords() {
-    return loadBaseRecords();
+  function loadCsv() {
+    const elements = getElements();
+    elements.status.textContent = 'Carregando base...';
     elements.summary.textContent = 'Lendo a base local de infrações.';
 
     const basePromise = window.INFRACOES_CSV_BASE64
@@ -718,32 +661,6 @@
     return Promise.all([basePromise, fishPromise]);
   }
 
-  function loadBaseRecords() {
-    if (window.fetch) {
-      return fetch('./data/infracoes.json', { cache: 'no-store' })
-        .then(function (response) {
-          if (!response.ok) throw new Error('Falha ao carregar o JSON de infrações.');
-          return response.json();
-        })
-        .then(mapJsonRecords)
-        .catch(function () {
-          if (!window.INFRACOES_CSV_BASE64) {
-            throw new Error('Não foi possível carregar o JSON de infrações.');
-          }
-
-          const rows = parseCsv(decodeEmbeddedBase64(window.INFRACOES_CSV_BASE64));
-          return mapRecords(rows);
-        });
-    }
-
-    if (window.INFRACOES_CSV_BASE64) {
-      const rows = parseCsv(decodeEmbeddedBase64(window.INFRACOES_CSV_BASE64));
-      return Promise.resolve(mapRecords(rows));
-    }
-
-    return Promise.reject(new Error('Navegador sem suporte ao carregamento da base.'));
-  }
-
   function infra_init() {
     const elements = getElements();
     if (!elements.search) return;
@@ -757,15 +674,14 @@
     }
 
     state.loading = true;
-    elements.status.textContent = 'Carregando base...';
-    elements.summary.textContent = 'Lendo a base local de infrações.';
 
-    Promise.all([loadBaseRecords(), loadOptionalText(['./fish.cleaned.csv', './fish.csv'])])
+    loadCsv()
       .then(function (payload) {
-        const baseRecords = payload[0] || [];
+        const csvText = payload[0] || '';
         const fishText = payload[1] || '';
+        const rows = parseCsv(csvText);
         const fishRows = fishText ? parseCsv(fishText) : [];
-        state.records = mergeRecords(baseRecords, mapFishRecords(fishRows));
+        state.records = mergeRecords(mapRecords(rows), mapFishRecords(fishRows));
         state.categories = Array.from(new Set(state.records.map(function (record) { return record.categoria; }).filter(Boolean)));
         state.measures = Array.from(new Set(state.records.map(function (record) { return record.medida; }).filter(Boolean)));
 
@@ -792,7 +708,4 @@
   window.infra_init = infra_init;
   window.infra_showTab = infra_showTab;
   window.infra_applyShortcut = infra_applyShortcut;
-  window.infra_clearFilters = infra_clearFilters;
-  window.infra_focusSearch = infra_focusSearch;
-  window.infra_scrollTop = infra_scrollTop;
 })();

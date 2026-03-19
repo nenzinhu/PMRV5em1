@@ -18,6 +18,18 @@ let ass_lotes = []; // [{viatura:'0005', policiais:[...]}, ...]
 // estado do builder
 let ass_build_vtr = null;
 let ass_build_pol = [];
+let ass_build_tipo = null;
+
+function ass_updateOverview() {
+  const modeEl = document.getElementById('ass_overview_mode');
+  const policeEl = document.getElementById('ass_overview_police');
+  const lotesEl = document.getElementById('ass_overview_lotes');
+  if (!modeEl || !policeEl || !lotesEl) return;
+
+  modeEl.textContent = ass_mesa ? 'Recepção P19' : 'Viatura';
+  policeEl.textContent = String(ass_build_pol.length);
+  lotesEl.textContent = String(ass_lotes.length + (ass_mesa ? 1 : 0));
+}
 
 function ass_toggleMesa() {
   ass_mesa = !ass_mesa;
@@ -32,6 +44,7 @@ function ass_toggleMesa() {
     ass_toggleManual();
   }
   ass_renderLotes();
+  ass_updateOverview();
 }
 
 // ---- Builder: seleção de viatura ----
@@ -49,6 +62,7 @@ function ass_build_selecionarVtr(btn, numero) {
   document.getElementById('ass_build_tipo_manual_wrap').classList.add('hidden');
   document.getElementById('ass_build_tipo_input').value = '';
   document.getElementById('ass_build_tipo_section').style.display = 'block';
+  ass_updateOverview();
 }
 
 function ass_build_toggleVtrManual(btn) {
@@ -72,6 +86,7 @@ function ass_build_toggleVtrManual(btn) {
     document.getElementById('ass_build_vtr_label').style.display = 'none';
     document.getElementById('ass_build_tipo_section').style.display = 'none';
   }
+  ass_updateOverview();
 }
 
 function ass_build_selecionarTipo(btn, tipo) {
@@ -92,6 +107,7 @@ function ass_build_selecionarTipo(btn, tipo) {
     }
   }
   ass_build_atualizarLabel();
+  ass_updateOverview();
 }
 
 function ass_build_atualizarLabel() {
@@ -132,6 +148,7 @@ function ass_build_toggleNome(btn, nome) {
   if (idx === -1) { ass_build_pol.push(nome); btn.classList.add('active'); }
   else { ass_build_pol.splice(idx, 1); btn.classList.remove('active'); }
   ass_build_renderChips();
+  ass_updateOverview();
 }
 
 function ass_build_toggleManualPol() {
@@ -145,6 +162,7 @@ function ass_build_adicionarManual() {
   const completo = grad + ' ' + nome;
   if (!ass_build_pol.includes(completo)) { ass_build_pol.push(completo); ass_build_renderChips(); }
   document.getElementById('ass_build_nome_manual').value = '';
+  ass_updateOverview();
 }
 
 function ass_build_renderChips() {
@@ -163,9 +181,11 @@ function ass_build_renderChips() {
         if (b.textContent === nome) b.classList.remove('active');
       });
       ass_build_renderChips();
+      ass_updateOverview();
     };
     lista.appendChild(tag);
   });
+  ass_updateOverview();
 }
 
 // ---- Confirmar e adicionar lote ----
@@ -222,6 +242,7 @@ function ass_adicionarLote() {
   }
 
   ass_renderLotes();
+  ass_updateOverview();
 }
 
 function ass_renderLotes() {
@@ -259,11 +280,13 @@ function ass_renderLotes() {
     }
     lista.appendChild(row);
   });
+  ass_updateOverview();
 }
 
 function ass_removerLote(i) {
   ass_lotes.splice(i, 1);
   ass_renderLotes();
+  ass_updateOverview();
 }
 
 function ass_toggleManual() {
@@ -315,6 +338,8 @@ function ass_gerar() {
   document.getElementById('ass_result').classList.add('visible');
   document.getElementById('ass_result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
+
+document.addEventListener('DOMContentLoaded', ass_updateOverview);
 
 
 
